@@ -1,7 +1,7 @@
 plugins {
   `java-library`
-  id("io.papermc.paperweight.userdev") version "1.5.5"
-  id("xyz.jpenilla.run-paper") version "2.1.0" // Adds runServer and runMojangMappedServer tasks for testing
+  id("io.papermc.paperweight.userdev") version "2.0.0-beta.14"
+  //id("xyz.jpenilla.run-paper") version "2.1.0" // Adds runServer and runMojangMappedServer tasks for testing
 }
 
 group = "de.elia"
@@ -10,7 +10,7 @@ description = "SoulSMP Tools"
 
 java {
   // Configure the java toolchain. This allows Gradle to auto-provision JDK 17 on systems that only have JDK 8 installed, for example.
-  toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+  toolchain.languageVersion.set(JavaLanguageVersion.of(21))
 }
 
 repositories {
@@ -21,8 +21,8 @@ repositories {
 }
 
 dependencies {
-  paperweight.paperDevBundle("1.20.4-R0.1-SNAPSHOT")
-  implementation("de.elia.api:SoulLibrary:3.0.1")
+  paperweight.paperDevBundle("1.21.4-R0.1-SNAPSHOT")
+  implementation("de.elia.api:SoulLibrary:5.0.0")
   // paperweight.foliaDevBundle("1.20-R0.1-SNAPSHOT")
   // paperweight.devBundle("com.example.paperfork", "1.20-R0.1-SNAPSHOT")
 }

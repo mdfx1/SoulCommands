@@ -21,10 +21,12 @@ public class JoinLeave implements Listener {
     Player player = event.getPlayer();
     event.joinMessage(null);
     if(isVanished(player)) {
-      broadcast(color("#9545a3", player.getName()).append(gray(" hat den Server betreten!")));
+      //TODO: Fix color methode call error
+      //broadcast(color("#9545a3", player.getName()).append(gray(" hat den Server betreten!")));
     }
     if(!player.hasPlayedBefore()) {
-      messageWithPrefix(player, color("#9545a3", "Willkommen ").append(gray("auf dem")).append(color("#9545a3", "SoulSMP")).append(gray(".  Trete gerne unserem ")).append(blue("Discord")).append(gray(" Server über den /discord Command bei.")));
+      //TODO: Fix color methode call error
+      //messageWithPrefix(player, color("#9545a3", "Willkommen ").append(gray("auf dem")).append(color("#9545a3", "SoulSMP")).append(gray(".  Trete gerne unserem ")).append(blue("Discord")).append(gray(" Server über den /discord Command bei.")));
     }
   }
   @EventHandler
@@ -32,7 +34,8 @@ public class JoinLeave implements Listener {
     Player player = event.getPlayer();
     event.quitMessage(null);
     if(isVanished(player)) {
-      broadcast(color("#9545a3", player.getName()).append(gray(" hat den Server verlassen!")));
+      //TODO: Fix color methode call error
+      //broadcast(color("#9545a3", player.getName()).append(gray(" hat den Server verlassen!")));
     }
   }
 
