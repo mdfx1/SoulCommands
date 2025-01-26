@@ -1,5 +1,6 @@
-package de.elia;
+package de.elia.systemclasses;
 
+import de.elia.Main;
 import io.papermc.paper.plugin.bootstrap.BootstrapContext;
 import io.papermc.paper.plugin.bootstrap.PluginBootstrap;
 import io.papermc.paper.plugin.bootstrap.PluginProviderContext;

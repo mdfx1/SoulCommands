@@ -1,4 +1,4 @@
-package de.elia;
+package de.elia.systemclasses;
 
 import io.papermc.paper.plugin.loader.PluginClasspathBuilder;
 import io.papermc.paper.plugin.loader.PluginLoader;
@@ -14,6 +14,6 @@ public class Loader implements PluginLoader {
   public void classloader(@NotNull PluginClasspathBuilder classpathBuilder) {
     String projectPath = System.getProperty("user.dir");
     String libraryPath = projectPath + "/plugins/";
-    classpathBuilder.addLibrary(new JarLibrary(Path.of(libraryPath + "SoulLibrary-3.0.1.jar")));
+    classpathBuilder.addLibrary(new JarLibrary(Path.of(libraryPath + "SoulLibrary-5.0.0.jar")));
   }
 }

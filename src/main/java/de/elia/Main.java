@@ -1,5 +1,9 @@
 package de.elia;
 
+import de.elia.systemclasses.register.CommandRegister;
+import de.elia.systemclasses.register.EventRegister;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import org.jetbrains.annotations.NotNull;

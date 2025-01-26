@@ -1,8 +1,6 @@
-package de.elia;
+package de.elia.systemclasses.register;
 
-import de.elia.elia.chat.ChatListener;
-import de.elia.gemmerr.commandwatcher.CommandWatcherListener;
-import de.elia.gemmerr.joinleave.JoinLeave;
+import de.elia.commandwatcher.CommandWatcherListener;
 
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
@@ -20,8 +18,6 @@ public class EventRegister {
   private static final @NotNull Set<Listener> EVENTS =  new HashSet<>();
 
   static {
-    EVENTS.add(new JoinLeave());
-    EVENTS.add(new ChatListener());
     EVENTS.add(new CommandWatcherListener());
   }
 

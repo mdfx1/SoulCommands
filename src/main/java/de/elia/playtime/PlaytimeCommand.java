@@ -1,6 +1,6 @@
-package de.elia.gemmerr.commands.playtime;
+package de.elia.playtime;
 
-import de.elia.gemmerr.utils.ErrorMessages;
+import de.elia.utils.ErrorMessage;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Statistic;
@@ -19,15 +19,11 @@ import static de.elia.api.messages.builder.MessageBuilder.*;
 public class PlaytimeCommand extends Command {
 
   public PlaytimeCommand(){
-    this("playtime", "Send the playtime of a player", "Use /playtime [PLAYER]", Arrays.asList("pt", "timeplayed"));
+    this("playtime", "Send the playtime of a player", "Use /playtime [PLAYER]", Arrays.asList("timeplayed"));
   }
 
   public PlaytimeCommand(@NotNull String name, @NotNull String description, @NotNull String usageMessage, @NotNull List<String> aliases) {
     super(name, description, usageMessage, aliases);
-  }
-
-  private void sendUsage(Player player){
-    ErrorMessages.sendUsage("/playtime", player);
   }
 
   @NotNull
@@ -74,31 +70,41 @@ public class PlaytimeCommand extends Command {
   }
 
   @Override
-  public boolean execute(@NotNull CommandSender sender, @NotNull String commandLabel, @NotNull String[] args) {if (sender instanceof Player player) {
-      if(args.length == 0) {
+  public boolean execute(@NotNull CommandSender sender, @NotNull String commandLabel, @NotNull String[] args) {
+    boolean hasPermission = false;
+    if(!(sender instanceof Player player)){
+      ErrorMessage.noPlayer(sender);
+      return false;
+    }
+    if(player.hasPermission("soulcommands.admin") || player.isOp()){
+      hasPermission = true;
+    }
+    switch (args.length){
+      case 1:
         int playtime = player.getStatistic(Statistic.PLAY_ONE_MINUTE);
         playtime = playtime / 20;
         messageWithPrefix(player, gray("<gray>du hast eine Spielzeit von ").append(darkPurple("<#9545a3>" + shortInteger(playtime, player))).append(gray(".")));
-      }else if(args.length == 1) {
-        if(player.hasPermission("soulcommands.admin") || player.isOp()) {
-          Player target = Bukkit.getPlayer(args[0]);
-          if (target == null) {
-            ErrorMessages.sendNull(args[0] + " ist nicht online oder existiert nicht!", player);
-            return false;
-          }
-          int playtime = target.getStatistic(Statistic.PLAY_ONE_MINUTE);
-          playtime = playtime / 20;
-          messageWithPrefix(player, gray("<gray>du hast eine Spielzeit von ").append(darkPurple("<#9545a3>" + shortInteger(playtime, player))).append(gray(".")));
-          return true;
-        }else {
-          ErrorMessages.noPermission(player);
+        return true;
+      case 2:
+        if(hasPermission){
+          ErrorMessage.noPermission(player);
+          break;
+        }
+        Player target = Bukkit.getPlayer(args[0]);
+        if(target == null){
+          ErrorMessage.standard("Dieser Spieler existiert nicht", player);
+          break;
+        }
+      default:
+        if(hasPermission){
+          ErrorMessage.usage("/playtime [Player]", player);
           return false;
         }
-      }else {
-        this.sendUsage(player);
-        return false;
-      }
+        ErrorMessage.usage("/playtime", player);
+        break;
     }
     return false;
   }
+
+
 }

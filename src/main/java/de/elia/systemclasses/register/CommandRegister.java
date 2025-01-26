@@ -1,9 +1,9 @@
-package de.elia;
+package de.elia.systemclasses.register;
 
-import de.elia.gemmerr.commands.discord.DiscordCommand;
-import de.elia.gemmerr.commands.playtime.PlaytimeCommand;
+import de.elia.discord.DiscordCommand;
 
-import de.elia.gemmerr.commandwatcher.CommandWatcherToggle;
+import de.elia.commandwatcher.CommandWatcherToggle;
+import de.elia.playtime.PlaytimeCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
 import org.bukkit.command.Command;
