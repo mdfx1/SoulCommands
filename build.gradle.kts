@@ -4,17 +4,25 @@ plugins {
   id("xyz.jpenilla.run-paper") version "2.1.0" // Adds runServer and runMojangMappedServer tasks for testing
 }
 
-group = "io.papermc.paperweight"
-version = "1.0.0-SNAPSHOT"
-description = "Test plugin for paperweight-userdev"
+group = "de.elia"
+version = "2.0.0"
+description = "SoulSMP Tools"
 
 java {
-  // Configure the java toolchain. This allows gradle to auto-provision JDK 17 on systems that only have JDK 8 installed for example.
+  // Configure the java toolchain. This allows Gradle to auto-provision JDK 17 on systems that only have JDK 8 installed, for example.
   toolchain.languageVersion.set(JavaLanguageVersion.of(17))
 }
 
+repositories {
+  mavenCentral()
+  flatDir {
+    dirs("library")
+  }
+}
+
 dependencies {
-  paperweight.paperDevBundle("1.20-R0.1-SNAPSHOT")
+  paperweight.paperDevBundle("1.20.4-R0.1-SNAPSHOT")
+  implementation("de.elia.api:SoulLibrary:3.0.1")
   // paperweight.foliaDevBundle("1.20-R0.1-SNAPSHOT")
   // paperweight.devBundle("com.example.paperfork", "1.20-R0.1-SNAPSHOT")
 }
@@ -30,11 +38,12 @@ tasks {
 
     // Set the release flag. This configures what version bytecode the compiler will emit, as well as what JDK APIs are usable.
     // See https://openjdk.java.net/jeps/247 for more information.
-    options.release.set(17)
+    options.release.set(21)
   }
   javadoc {
     options.encoding = Charsets.UTF_8.name() // We want UTF-8 for everything
   }
+  /*
   processResources {
     filteringCharset = Charsets.UTF_8.name() // We want UTF-8 for everything
     val props = mapOf(
@@ -48,6 +57,7 @@ tasks {
       expand(props)
     }
   }
+   */
 
   /*
   reobfJar {

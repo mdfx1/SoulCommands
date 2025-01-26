@@ -1,0 +1,11 @@
+name: SoulCommands
+main: de.elia.Main
+bootstrapper: de.elia.BootsTrapper
+loader: de.elia.Loader
+api-version: '1.20'
+version: '2.0.0'
+authors:
+  - Elia
+  - Gemmerr
+description: SoulSMP Tools
+has-open-classloader: true
