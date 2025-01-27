@@ -1,9 +1,13 @@
 package de.elia.systemclasses.register;
 
-import de.elia.discord.DiscordCommand;
+import de.elia.features.discord.DiscordCommand;
 
-import de.elia.commandwatcher.CommandWatcherToggle;
-import de.elia.playtime.PlaytimeCommand;
+import de.elia.features.commandwatcher.CommandWatcherToggle;
+import de.elia.features.enderchest.CraftCommand;
+import de.elia.features.enderchest.EnderchestCommand;
+import de.elia.features.heal.HealCommand;
+import de.elia.features.invsee.InvseeCommand;
+import de.elia.features.playtime.PlaytimeCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
 import org.bukkit.command.Command;
@@ -23,6 +27,9 @@ public class CommandRegister {
     COMMANDS.put("discord", new DiscordCommand());
     COMMANDS.put("playtime", new PlaytimeCommand());
     COMMANDS.put("commandwatcher", new CommandWatcherToggle());
+    COMMANDS.put("heal", new HealCommand());
+    COMMANDS.put("craft", new CraftCommand());
+    COMMANDS.put("enderchest", new EnderchestCommand());
   }
 
   public static void registerCommand(@NotNull String name, @NotNull Command command, @NotNull Server server){

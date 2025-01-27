@@ -14,8 +14,15 @@ public class Message {
     Component messageOut = miniMessage.deserialize(messageIn);
     playerIn.sendMessage(miniMessage.deserialize("<dark_grey>[</dark_grey><gradient:#783D9F:#FF88FD><bold>SoulSMP</bold><dark_grey>]</dark_grey> ").append(messageOut));
   }
+  public static void mainPrefix(String messageIn, CommandSender sender) {
+    Component messageOut = miniMessage.deserialize(messageIn);
+    sender.sendMessage(miniMessage.deserialize("<dark_grey>[</dark_grey><gradient:#783D9F:#FF88FD><bold>SoulSMP</bold><dark_grey>]</dark_grey> ").append(messageOut));
+  }
   public static void mainPrefix(Component componentMessage, Player playerIn) {
     playerIn.sendMessage(miniMessage.deserialize("<dark_grey>[</dark_grey><gradient:#783D9F:#FF88FD><bold>SoulSMP</bold><dark_grey>]</dark_grey> ").append(componentMessage));
+  }
+  public static void mainPrefix(Component componentMessage, CommandSender sender) {
+    sender.sendMessage(miniMessage.deserialize("<dark_grey>[</dark_grey><gradient:#783D9F:#FF88FD><bold>SoulSMP</bold><dark_grey>]</dark_grey> ").append(componentMessage));
   }
   public static void cwPrefix(String messageIn, Player playerIn) {
     Component messageOut = miniMessage.deserialize(messageIn);
@@ -23,11 +30,11 @@ public class Message {
   }
   public static void errorPrefix(String messageIn, Player playerIn) {
     Component messageOut = miniMessage.deserialize(messageIn);
-    playerIn.sendMessage(miniMessage.deserialize("<dark_grey>[</dark_grey><gradient:#A01B1B:#E75656><bold>CW</bold><dark_grey>]</dark_grey> ").append(messageOut));
+    playerIn.sendMessage(miniMessage.deserialize("<dark_grey>[</dark_grey><gradient:#A01B1B:#E75656><bold>Error</bold><dark_grey>]</dark_grey> ").append(messageOut));
   }
   public static void errorPrefix(String messageIn, CommandSender sender) {
     Component messageOut = miniMessage.deserialize(messageIn);
-    sender.sendMessage(miniMessage.deserialize("<dark_grey>[</dark_grey><gradient:#A01B1B:#E75656><bold>CW</bold><dark_grey>]</dark_grey> ").append(messageOut));
+    sender.sendMessage(miniMessage.deserialize("<dark_grey>[</dark_grey><gradient:#A01B1B:#E75656><bold>Error</bold><dark_grey>]</dark_grey> ").append(messageOut));
   }
 
 

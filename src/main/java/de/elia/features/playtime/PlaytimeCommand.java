@@ -1,7 +1,8 @@
-package de.elia.playtime;
+package de.elia.features.playtime;
 
 import de.elia.utils.ErrorMessage;
 
+import de.elia.utils.Message;
 import org.bukkit.Bukkit;
 import org.bukkit.Statistic;
 import org.bukkit.command.Command;
@@ -19,15 +20,15 @@ import static de.elia.api.messages.builder.MessageBuilder.*;
 public class PlaytimeCommand extends Command {
 
   public PlaytimeCommand(){
-    this("playtime", "Send the playtime of a player", "Use /playtime [PLAYER]", Arrays.asList("timeplayed"));
+    this("playtime");
   }
 
-  public PlaytimeCommand(@NotNull String name, @NotNull String description, @NotNull String usageMessage, @NotNull List<String> aliases) {
-    super(name, description, usageMessage, aliases);
+  public PlaytimeCommand(@NotNull String name) {
+    super(name);
   }
 
   @NotNull
-  private String shortInteger(int duration, @NotNull Player player) {
+  private String shortInteger(@NotNull int duration) {
     String string = "";
     int hours = 0;
     int minutes = 0;
@@ -49,8 +50,6 @@ public class PlaytimeCommand extends Command {
       } else {
         string = string + hours + "h ";
       }
-    }else {
-      message(player, red("Time is null!"));
     }
     if(minutes!=0) {
       if (minutes <= 9) {
@@ -58,8 +57,6 @@ public class PlaytimeCommand extends Command {
       } else {
         string = string + minutes + "m ";
       }
-    }else{
-      message(player, red("Time is null!"));
     }
     if(seconds <=9) {
       string= string+"0"+seconds+"s";
@@ -76,29 +73,36 @@ public class PlaytimeCommand extends Command {
       ErrorMessage.noPlayer(sender);
       return false;
     }
-    if(player.hasPermission("soulcommands.admin") || player.isOp()){
+    if(player.hasPermission("soulsmp.admin") || player.isOp()){
       hasPermission = true;
     }
     switch (args.length){
-      case 1:
+      case 0:
         int playtime = player.getStatistic(Statistic.PLAY_ONE_MINUTE);
         playtime = playtime / 20;
-        messageWithPrefix(player, gray("<gray>du hast eine Spielzeit von ").append(darkPurple("<#9545a3>" + shortInteger(playtime, player))).append(gray(".")));
+        Message.mainPrefix("du hast eine Spielzeit von <#9545a3>" + shortInteger(playtime) + "<reset>.", player);
         return true;
-      case 2:
-        if(hasPermission){
+      case 1:
+        if(!hasPermission){
           ErrorMessage.noPermission(player);
           break;
         }
-        Player target = Bukkit.getPlayer(args[0]);
-        if(target == null){
+
+        Player targetPlayer = Bukkit.getPlayerExact(args[0]);
+        if (targetPlayer == null) {
           ErrorMessage.standard("Dieser Spieler existiert nicht", player);
           break;
         }
+        int targetPlaytime = targetPlayer.getStatistic(Statistic.PLAY_ONE_MINUTE);
+        targetPlaytime = targetPlaytime / 20;
+        Message.mainPrefix("<#9545a3>" + targetPlayer.getName() + "</#9545a3> hat eine Spielzeit von <#9545a3>" + shortInteger(targetPlaytime) + "<reset>.", player);
+        return true;
+
       default:
+        //send usage according to permission
         if(hasPermission){
           ErrorMessage.usage("/playtime [Player]", player);
-          return false;
+          break;
         }
         ErrorMessage.usage("/playtime", player);
         break;

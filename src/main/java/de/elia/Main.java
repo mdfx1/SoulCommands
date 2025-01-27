@@ -2,8 +2,8 @@ package de.elia;
 
 import de.elia.systemclasses.register.CommandRegister;
 import de.elia.systemclasses.register.EventRegister;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.minimessage.MiniMessage;
+import de.elia.api.logging.PluginLogger;
+import org.bukkit.Server;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import org.jetbrains.annotations.NotNull;
@@ -11,12 +11,22 @@ import org.jetbrains.annotations.NotNull;
 //This class loads the Plugin
 public class Main extends JavaPlugin {
 
-  private static Main main;
+  private Main instance;
+  public static Server server;
+  final PluginLogger soulLogger = new PluginLogger("SoulCommand-Logger");
 
   @Override
-  public void onEnable(){main = this;
+  public void onEnable(){
+    //set instance
+    instance = this;
+    server = this.getServer();
+
+    //Load Commands and Events
     CommandRegister.registerCommands(this.getServer());
     EventRegister.registerEvents(this);
+
+    //remove restart Command
+    this.getServer().getCommandMap().getKnownCommands().remove("restart");
   }
 
   @Override
@@ -25,7 +35,12 @@ public class Main extends JavaPlugin {
   }
 
   @NotNull
-  public static Main pluginMain(){
-    return main;
+  public Main getInstance() {
+    return instance;
   }
+
+  public @NotNull PluginLogger getSoulLogger() {
+    return soulLogger;
+  }
+
 }

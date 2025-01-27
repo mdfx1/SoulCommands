@@ -1,4 +1,4 @@
-package de.elia.commandwatcher;
+package de.elia.features.commandwatcher;
 
 import de.elia.utils.ErrorMessage;
 import de.elia.utils.Message;
@@ -15,11 +15,11 @@ public class CommandWatcherToggle extends Command {
   public static ArrayList<Player> cwPlayers = new ArrayList<>();
 
   public CommandWatcherToggle() {
-    this("commandwatcher", "You can enable or disable the command watcher", "usageMessage", new ArrayList<>());
+    this("commandwatcher");
   }
 
-  protected CommandWatcherToggle(@NotNull String name, @NotNull String description, @NotNull String usageMessage, @NotNull List<String> aliases) {
-    super(name, description, usageMessage, aliases);
+  protected CommandWatcherToggle(@NotNull String name) {
+    super(name);
   }
 
   @Override
@@ -28,7 +28,7 @@ public class CommandWatcherToggle extends Command {
       ErrorMessage.noPlayer(sender);
       return false;
     }
-    if(!player.hasPermission("soulsmp.commandwatcher") || !player.isOp()){
+    if(!player.hasPermission("soulsmp.admin") || !player.isOp()){
       ErrorMessage.noPermission(player);
       return false;
     }

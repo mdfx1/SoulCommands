@@ -1,6 +1,6 @@
 package de.elia.systemclasses.register;
 
-import de.elia.commandwatcher.CommandWatcherListener;
+import de.elia.features.commandwatcher.CommandWatcherListener;
 
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
