@@ -101,7 +101,7 @@ public class PlaytimeCommand extends Command {
       default:
         //send usage according to permission
         if(hasPermission){
-          ErrorMessage.usage("/playtime [Player]", player);
+          ErrorMessage.usage("/playtime [player]", player);
           break;
         }
         ErrorMessage.usage("/playtime", player);

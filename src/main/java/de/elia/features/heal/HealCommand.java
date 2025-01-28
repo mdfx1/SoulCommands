@@ -37,6 +37,9 @@ public class HealCommand extends Command {
         }
         player.setHealth(20);
         player.setFoodLevel(20);
+
+        //TODO clear bad effects (like honey)
+
         Message.mainPrefix("Du hast dich geheilt!", player);
         return true;
       case 1:
