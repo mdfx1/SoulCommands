@@ -36,6 +36,8 @@ public class Message {
     Component messageOut = miniMessage.deserialize(messageIn);
     sender.sendMessage(miniMessage.deserialize("<dark_grey>[</dark_grey><gradient:#A01B1B:#E75656><bold>Error</bold><dark_grey>]</dark_grey> ").append(messageOut));
   }
+
+
   public static void standard(String messageIn, Player playerIn) {
     Component messageOut = miniMessage.deserialize(messageIn);
     playerIn.sendMessage(messageOut);

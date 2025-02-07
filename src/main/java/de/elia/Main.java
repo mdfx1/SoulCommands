@@ -1,9 +1,12 @@
 package de.elia;
 
+import de.elia.systemclasses.DatabaseManager;
 import de.elia.systemclasses.register.CommandRegister;
 import de.elia.systemclasses.register.EventRegister;
 import de.elia.api.logging.PluginLogger;
+import org.bukkit.Bukkit;
 import org.bukkit.Server;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import org.jetbrains.annotations.NotNull;
@@ -11,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 //This class loads the Plugin
 public class Main extends JavaPlugin {
 
-  private Main instance;
+  private static Main instance;
   public static Server server;
   final PluginLogger soulLogger = new PluginLogger("SoulCommand-Logger");
 
@@ -25,6 +28,8 @@ public class Main extends JavaPlugin {
     CommandRegister.registerCommands(this.getServer());
     EventRegister.registerEvents(this);
 
+    DatabaseManager.connect();
+
     //remove restart Command
     this.getServer().getCommandMap().getKnownCommands().remove("restart");
   }
@@ -32,10 +37,12 @@ public class Main extends JavaPlugin {
   @Override
   public void onDisable(){
     CommandRegister.unregisterCommands(this.getServer());
+
+    DatabaseManager.disconnect();
   }
 
   @NotNull
-  public Main getInstance() {
+  public static Main getInstance() {
     return instance;
   }
 

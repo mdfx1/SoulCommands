@@ -3,6 +3,7 @@ package de.elia.features.playtime;
 import de.elia.utils.ErrorMessage;
 
 import de.elia.utils.Message;
+import de.elia.utils.MessageUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Statistic;
 import org.bukkit.command.Command;
@@ -27,45 +28,6 @@ public class PlaytimeCommand extends Command {
     super(name);
   }
 
-  @NotNull
-  private String shortInteger(@NotNull int duration) {
-    String string = "";
-    int hours = 0;
-    int minutes = 0;
-    int seconds = 0;
-    if(duration / 60 / 60 >=1) {
-      hours = duration / 60 /60;
-      duration = duration - ((duration / 60 / 60) * 60 * 60);
-    }
-    if(duration / 60 >= 1) {
-      minutes = duration / 60;
-      duration = duration - ((duration /60)*60);
-    }
-    if(duration >=1) {
-      seconds = duration;
-    }
-    if(hours!=0) {
-      if (hours <= 9) {
-        string = string + "0" + hours + "h ";
-      } else {
-        string = string + hours + "h ";
-      }
-    }
-    if(minutes!=0) {
-      if (minutes <= 9) {
-        string = string + "0" + minutes + "m ";
-      } else {
-        string = string + minutes + "m ";
-      }
-    }
-    if(seconds <=9) {
-      string= string+"0"+seconds+"s";
-    }else{
-      string= string+seconds+"s";
-    }
-    return string;
-  }
-
   @Override
   public boolean execute(@NotNull CommandSender sender, @NotNull String commandLabel, @NotNull String[] args) {
     boolean hasPermission = false;
@@ -80,7 +42,7 @@ public class PlaytimeCommand extends Command {
       case 0:
         int playtime = player.getStatistic(Statistic.PLAY_ONE_MINUTE);
         playtime = playtime / 20;
-        Message.mainPrefix("du hast eine Spielzeit von <#9545a3>" + shortInteger(playtime) + "<reset>.", player);
+        Message.mainPrefix("du hast eine Spielzeit von <#FF9BDF>" + MessageUtils.shortInteger(playtime) + "<reset>.", player);
         return true;
       case 1:
         if(!hasPermission){
@@ -95,13 +57,13 @@ public class PlaytimeCommand extends Command {
         }
         int targetPlaytime = targetPlayer.getStatistic(Statistic.PLAY_ONE_MINUTE);
         targetPlaytime = targetPlaytime / 20;
-        Message.mainPrefix("<#9545a3>" + targetPlayer.getName() + "</#9545a3> hat eine Spielzeit von <#9545a3>" + shortInteger(targetPlaytime) + "<reset>.", player);
+        Message.mainPrefix("<#FF9BDF>" + targetPlayer.getName() + "</#FF9BDF> hat eine Spielzeit von <#FF9BDF>" + MessageUtils.shortInteger(targetPlaytime) + "<reset>.", player);
         return true;
 
       default:
         //send usage according to permission
         if(hasPermission){
-          ErrorMessage.usage("/playtime [player]", player);
+          ErrorMessage.usage("/playtime [Player]", player);
           break;
         }
         ErrorMessage.usage("/playtime", player);
