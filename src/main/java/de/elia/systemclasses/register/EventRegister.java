@@ -1,5 +1,6 @@
 package de.elia.systemclasses.register;
 
+import de.elia.features.chat.ChatListener;
 import de.elia.features.commandwatcher.CommandWatcherListener;
 
 import org.bukkit.Bukkit;
@@ -19,6 +20,7 @@ public class EventRegister {
 
   static {
     EVENTS.add(new CommandWatcherListener());
+    EVENTS.add(new ChatListener());
   }
 
   public static void registerEvents(@NotNull PluginManager pluginManager, @NotNull Plugin plugin){

@@ -46,7 +46,7 @@ public class SetWarpCommand extends Command {
 
         if(warpManager.setWarp(args[0], warpLocation)){
             warpManager.saveWarps();
-            Message.mainPrefix("du hast den Warp <#FF9BDF>" + args[0] + "</#FF9BDF> bei <#FF9BDF>" + warpLocation.getX() + ", " + warpLocation.getY() + ", " + warpLocation.getZ() + " </#FF9BDF> gesetzt", player);
+            Message.mainPrefix("du hast den Warp <#FF9BDF>" + args[0] + "</#FF9BDF> bei <#FF9BDF>" + warpLocation.getX() + ", " + warpLocation.getY() + ", " + warpLocation.getZ() + " (" + warpLocation.getYaw() + ") </#FF9BDF> gesetzt", player);
             return true;
         }
         ErrorMessage.standard("dieser Warp existiert bereits an dieser Stelle", player);

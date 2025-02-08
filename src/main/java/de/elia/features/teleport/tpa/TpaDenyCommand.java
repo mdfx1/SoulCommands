@@ -8,6 +8,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+import javax.swing.*;
 import java.sql.Struct;
 import java.util.Map;
 
@@ -31,8 +32,10 @@ public class TpaDenyCommand extends Command {
         boolean requested = false;
         for (Map.Entry<Player, Player> entry : TpaCommand.getPending().entrySet()) {
           if (entry.getValue().equals(player)) {
-            TpaCommand.getPending().remove(entry.getKey(), player);
-            Message.standard("<grey>anfrage(n) abgelehnt", player);
+            Player targetPlayer = entry.getKey();
+            TpaCommand.getPending().remove(targetPlayer, player);
+            Message.standard("<grey>anfrage von <#FF9BDF>" + targetPlayer.getName() + "</#FF9BDF> abgelehnt", player);
+            Message.mainPrefix("deine Anfrage an <#FF9BDF>" + player.getName() + "</#FF9BDF> wurde abgelehnt", targetPlayer);
             requested = true;
           }
         }
@@ -50,6 +53,7 @@ public class TpaDenyCommand extends Command {
         if(TpaCommand.getPending().get(targetPlayer) != null &&   TpaCommand.getPending().get(targetPlayer).equals(player)){
           TpaCommand.getPending().remove(targetPlayer, player);
           Message.standard("<grey>anfrage abgelehnt", player);
+          Message.mainPrefix("deine Anfrage an <#FF9BDF>" + player.getName() + "</#FF9BDF> wurde abgelehnt", targetPlayer);
         } else{
           ErrorMessage.standard("Dieser Spieler möchte sich nicht zu dir teleportieren", player);
         }

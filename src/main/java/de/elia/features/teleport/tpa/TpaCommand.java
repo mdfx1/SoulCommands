@@ -54,8 +54,8 @@ public class TpaCommand extends Command {
 
     Component message = miniMessage.deserialize("du hast eine tpa von <#FF9BDF>" + player.getName() + "</#FF9BDF> erhalten. ");
     Component slash = miniMessage.deserialize("/");
-    Component accept = miniMessage.deserialize("<#FF9BDF>annehmen</#FF9BDF>").clickEvent(ClickEvent.runCommand("/tpaaccept")).hoverEvent(HoverEvent.showText(miniMessage.deserialize("<grey>klick hier")));
-    Component deny = miniMessage.deserialize("<#FF9BDF>ablehnen</#FF9BDF>").clickEvent(ClickEvent.runCommand("/tpadeny")).hoverEvent(HoverEvent.showText(miniMessage.deserialize("<grey>klick hier")));
+    Component accept = miniMessage.deserialize("<#FF9BDF>annehmen</#FF9BDF>").clickEvent(ClickEvent.runCommand("/tpaaccept " + player.getName())).hoverEvent(HoverEvent.showText(miniMessage.deserialize("<grey>klick hier")));
+    Component deny = miniMessage.deserialize("<#FF9BDF>ablehnen</#FF9BDF>").clickEvent(ClickEvent.runCommand("/tpadeny " + player.getName())).hoverEvent(HoverEvent.showText(miniMessage.deserialize("<grey>klick hier")));
     Message.mainPrefix(message.append(accept).append(slash).append(deny), targetPlayer);
 
     return false;

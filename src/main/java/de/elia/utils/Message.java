@@ -42,4 +42,7 @@ public class Message {
     Component messageOut = miniMessage.deserialize(messageIn);
     playerIn.sendMessage(messageOut);
   }
+  public static void standard(Component messageIn, Player playerIn) {
+    playerIn.sendMessage(messageIn);
+  }
 }

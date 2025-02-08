@@ -47,7 +47,7 @@ public class SetSpawnCommand extends Command {
         spawnLocation.setYaw(TeleportUtils.normalizeYaw(player.getLocation().getYaw()));
 
         Bukkit.getWorld(config.getString("default-world")).setSpawnLocation(spawnLocation);
-        Message.mainPrefix("der Spawn wurde bei " + spawnLocation.getX() + ", " + spawnLocation.getY() + ", " + spawnLocation.getZ() + " (" + spawnLocation.getYaw() + ") gesetzt", player);
+        Message.mainPrefix("der Spawn wurde bei <#FF9BDF>" + spawnLocation.getX() + ", " + spawnLocation.getY() + ", " + spawnLocation.getZ() + " (" + spawnLocation.getYaw() + ")</#FF9BDF> gesetzt", player);
         break;
       case 3:
         try {

@@ -10,3 +10,10 @@ authors:
   - Wate
 description: SoulSMP Tools
 has-open-classloader: true
+
+dependencies:
+  server:
+    BetterTeams:
+      required: true
+    LuckPerms:
+      required: true
