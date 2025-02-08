@@ -1,9 +1,11 @@
 package de.elia.features.teleport.spawn;
 
 import de.elia.Main;
+import de.elia.features.teleport.TeleportUtils;
 import de.elia.utils.ErrorMessage;
 import de.elia.utils.Message;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Server;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -36,14 +38,16 @@ public class SetSpawnCommand extends Command {
     int y;
     int z;
     Float angle;
+    Location location;
     switch (args.length) {
       case 0:
-        x = player.getLocation().getBlockX();
-        y = player.getLocation().getBlockY();
-        z = player.getLocation().getBlockZ();
-        angle = player.getLocation().getYaw();
-        Bukkit.getWorld(config.getString("default-world")).setSpawnLocation(x, y, z, angle);
-        Message.mainPrefix("der Spawn wurde bei " + x + ", " + y + ", " + ", " + z + " (" + angle + ") gesetzt", player);
+        Location spawnLocation;
+        spawnLocation = TeleportUtils.centerPlayerOnBlock(player);
+        spawnLocation.setPitch(0);
+        spawnLocation.setYaw(TeleportUtils.normalizeYaw(player.getLocation().getYaw()));
+
+        Bukkit.getWorld(config.getString("default-world")).setSpawnLocation(spawnLocation);
+        Message.mainPrefix("der Spawn wurde bei " + spawnLocation.getX() + ", " + spawnLocation.getY() + ", " + spawnLocation.getZ() + " (" + spawnLocation.getYaw() + ") gesetzt", player);
         break;
       case 3:
         try {

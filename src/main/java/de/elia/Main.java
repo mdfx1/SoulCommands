@@ -1,5 +1,6 @@
 package de.elia;
 
+import de.elia.features.teleport.warp.WarpManager;
 import de.elia.systemclasses.DatabaseManager;
 import de.elia.systemclasses.register.CommandRegister;
 import de.elia.systemclasses.register.EventRegister;
@@ -17,12 +18,16 @@ public class Main extends JavaPlugin {
   private static Main instance;
   public static Server server;
   final PluginLogger soulLogger = new PluginLogger("SoulCommand-Logger");
+  private static WarpManager warpManager;
 
   @Override
   public void onEnable(){
     //set instance
     instance = this;
     server = this.getServer();
+
+    //set WarpManager
+    warpManager = new WarpManager(instance);
 
     //Load Commands and Events
     CommandRegister.registerCommands(this.getServer());
@@ -39,6 +44,11 @@ public class Main extends JavaPlugin {
     CommandRegister.unregisterCommands(this.getServer());
 
     DatabaseManager.disconnect();
+  }
+
+  @NotNull
+  public static WarpManager getWarpManager() {
+    return warpManager;
   }
 
   @NotNull

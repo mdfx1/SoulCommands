@@ -34,5 +34,7 @@ public class FlyCommand extends Command {
       Message.mainPrefix("du kannst nun fliegen", player);
     }
     return true;
+
+    //TODO fly after relogging
   }
 }

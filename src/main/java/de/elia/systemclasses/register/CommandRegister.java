@@ -15,6 +15,9 @@ import de.elia.features.teleport.spawn.SpawnCommand;
 import de.elia.features.teleport.tpa.TpaAcceptCommand;
 import de.elia.features.teleport.tpa.TpaCommand;
 import de.elia.features.teleport.tpa.TpaDenyCommand;
+import de.elia.features.teleport.warp.DeleteWarpCommand;
+import de.elia.features.teleport.warp.SetWarpCommand;
+import de.elia.features.teleport.warp.WarpCommand;
 import de.elia.features.whois.WhoisCommand;
 import io.papermc.paper.configuration.WorldConfiguration;
 import org.bukkit.Bukkit;
@@ -47,6 +50,9 @@ public class CommandRegister {
     COMMANDS.put("tpaaccept", new TpaAcceptCommand());
     COMMANDS.put("fly", new FlyCommand());
     COMMANDS.put("flyspeed", new FlySpeedCommand());
+    COMMANDS.put("warp", new WarpCommand());
+    COMMANDS.put("setwarp", new SetWarpCommand());
+    COMMANDS.put("delwarp", new DeleteWarpCommand());
   }
 
   public static void registerCommand(@NotNull String name, @NotNull Command command, @NotNull Server server){
