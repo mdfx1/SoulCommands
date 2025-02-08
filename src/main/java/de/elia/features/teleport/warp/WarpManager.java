@@ -23,6 +23,7 @@ public class WarpManager {
     loadWarps();
   }
 
+  //load warps from file
   public void loadWarps() {
     warps.clear();
     if (config.contains("warps")) {
@@ -33,6 +34,7 @@ public class WarpManager {
     }
   }
 
+  //save warps to file
   public void saveWarps() {
     config.set("warps", null);
     for (Map.Entry<String, Location> entry : warps.entrySet()) {
@@ -45,6 +47,7 @@ public class WarpManager {
     }
   }
 
+  //get warp location
   public Location getWarp(String warpName) {
     if(warps.containsKey(warpName)){
       return warps.get(warpName);
@@ -52,6 +55,7 @@ public class WarpManager {
     return null;
   }
 
+  //set warp location
   public boolean setWarp(String warpName, Location location) {
     if(warps.containsValue(location) && warps.containsKey(warpName)){
       return false;
@@ -60,6 +64,7 @@ public class WarpManager {
     return true;
   }
 
+  //remove warp
   public boolean removeWarp(String warpName) {
     if(!warps.containsKey(warpName)){
       return false;

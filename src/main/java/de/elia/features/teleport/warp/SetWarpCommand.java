@@ -37,13 +37,15 @@ public class SetWarpCommand extends Command {
         }
         if(args.length != 1){
             ErrorMessage.usage("/setwarp [warp]", player);
+            return false;
         }
-        //center Player
+        //center warp location on block
         Location warpLocation;
         warpLocation = TeleportUtils.centerPlayerOnBlock(player);
         warpLocation.setPitch(0);
         warpLocation.setYaw(TeleportUtils.normalizeYaw(player.getLocation().getYaw()));
 
+        //set warp
         if(warpManager.setWarp(args[0], warpLocation)){
             warpManager.saveWarps();
             Message.mainPrefix("du hast den Warp <#FF9BDF>" + args[0] + "</#FF9BDF> bei <#FF9BDF>" + warpLocation.getX() + ", " + warpLocation.getY() + ", " + warpLocation.getZ() + " (" + warpLocation.getYaw() + ") </#FF9BDF> gesetzt", player);

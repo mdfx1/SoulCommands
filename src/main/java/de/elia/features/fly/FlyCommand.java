@@ -26,10 +26,13 @@ public class FlyCommand extends Command {
       ErrorMessage.noPermission(player);
       return false;
     }
+    //toggle fly for player
     if(player.getAllowFlight()){
+      //player can fly
       player.setAllowFlight(false);
       Message.mainPrefix("du kannst nun nicht mehr fliegen", player);
     } else {
+      //player can't fly
       player.setAllowFlight(true);
       Message.mainPrefix("du kannst nun fliegen", player);
     }

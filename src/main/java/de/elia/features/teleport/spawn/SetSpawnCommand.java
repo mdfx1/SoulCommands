@@ -41,6 +41,7 @@ public class SetSpawnCommand extends Command {
     Location location;
     switch (args.length) {
       case 0:
+        //set spawn according to player location
         Location spawnLocation;
         spawnLocation = TeleportUtils.centerPlayerOnBlock(player);
         spawnLocation.setPitch(0);
@@ -50,6 +51,7 @@ public class SetSpawnCommand extends Command {
         Message.mainPrefix("der Spawn wurde bei <#FF9BDF>" + spawnLocation.getX() + ", " + spawnLocation.getY() + ", " + spawnLocation.getZ() + " (" + spawnLocation.getYaw() + ")</#FF9BDF> gesetzt", player);
         break;
       case 3:
+        //set spawn according to given coordinates
         try {
           x = Integer.parseInt(args[0]);
           y = Integer.parseInt(args[0]);
@@ -62,6 +64,7 @@ public class SetSpawnCommand extends Command {
         Message.mainPrefix("der Spawn wurde bei " + x + ", " + y + ", " + ", " + z + " gesetzt", player);
         break;
       case 4:
+        //set spawn according to given coordinates and angle
         try {
           x = Integer.parseInt(args[0]);
           y = Integer.parseInt(args[0]);

@@ -29,9 +29,11 @@ public class TpaAcceptCommand extends Command {
 
     switch (args.length){
       case 0:
+        //accept all open tpa requests
         boolean requested = false;
         for (Map.Entry<Player, Player> entry : TpaCommand.getPending().entrySet()) {
           if (entry.getValue().equals(player)) {
+            //all entry's with player as target
             entry.getKey().teleport(player);
             TpaCommand.getPending().remove(entry.getKey(), player);
             Message.standard("<grey>teleportiere...", entry.getKey());
@@ -49,6 +51,7 @@ public class TpaAcceptCommand extends Command {
           return false;
         }
 
+        //only accept if player has a pending request from targetPlayer
         if(TpaCommand.getPending().get(targetPlayer) != null && TpaCommand.getPending().get(targetPlayer).equals(player)){
           TpaCommand.getPending().remove(targetPlayer, player);
           targetPlayer.teleport(player);

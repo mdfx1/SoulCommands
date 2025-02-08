@@ -36,20 +36,19 @@ public class WarpCommand extends Command {
       return false;
     }
     if(args.length == 1){
-      warpManager.loadWarps();
-      Location warpLocation = warpManager.getWarp(args[0]);
-      if(warpLocation != null){
-        player.teleport(warpLocation);
-        Message.standard("<grey>teleportiere...", player);
-        return true;
-      }
-      ErrorMessage.standard("Dieser Warp existiert nicht", player);
-      return false;
-    }
-    else {
       ErrorMessage.usage("/warp [warp]", player);
       return false;
     }
+    //get warp location
+    Location warpLocation = warpManager.getWarp(args[0]);
+    //teleport player to warp location if warp exists
+    if(warpLocation != null){
+      player.teleport(warpLocation);
+      Message.standard("<grey>teleportiere...", player);
+      return true;
+    }
+    ErrorMessage.standard("Dieser Warp existiert nicht", player);
+    return false;
   }
 
   @Override

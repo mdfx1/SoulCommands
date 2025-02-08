@@ -35,6 +35,7 @@ public class HealCommand extends Command {
           ErrorMessage.noPlayer(sender);
           break;
         }
+        //set health and food level to 20 for sender
         player.setHealth(20);
         player.setFoodLevel(20);
         Message.mainPrefix("Du hast dich geheilt!", player);
@@ -45,6 +46,7 @@ public class HealCommand extends Command {
           ErrorMessage.standard("Dieser Spieler existiert nicht", sender);
           break;
         }
+        //set health and food level to 20 for target
         target.setHealth(20);
         target.setFoodLevel(20);
         Message.mainPrefix("Du hast " + target.getName() + " geheilt!", sender);

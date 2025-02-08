@@ -31,12 +31,16 @@ public class FlySpeedCommand extends Command {
     }
     if(args.length == 1) {
       try {
+        //set speed
         int speed = Integer.parseInt(args[0]);
+        //check if speed is between 0 and 100
         if (speed > 99) {
           ErrorMessage.standard("Please enter a number less than 100%", player);
           return false;
         }
+        //convert speed to float
         float floatSpeed = (float) (speed * .01);
+        //set fly speed
         player.setFlySpeed(floatSpeed);
         Message.mainPrefix("du fliegst nun mit " + speed + "% Geschwindigkeit. <grey>(Standard: 10)", player);
         return true;

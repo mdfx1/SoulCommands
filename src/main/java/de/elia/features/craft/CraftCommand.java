@@ -27,6 +27,7 @@ public class CraftCommand extends Command {
       ErrorMessage.noPlayer(sender);
       return false;
     }
+    //open Workbench for player
     player.openWorkbench(null, true);
     return false;
   }

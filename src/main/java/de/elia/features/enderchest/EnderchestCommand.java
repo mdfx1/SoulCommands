@@ -23,6 +23,7 @@ public class EnderchestCommand extends Command {
       ErrorMessage.noPlayer(sender);
       return false;
     }
+    //open ender chest for player as inventory
     player.openInventory(player.getEnderChest());
     return false;
   }

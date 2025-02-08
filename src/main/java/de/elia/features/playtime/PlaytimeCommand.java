@@ -35,13 +35,16 @@ public class PlaytimeCommand extends Command {
       ErrorMessage.noPlayer(sender);
       return false;
     }
+    //set permission for later use
     if(player.hasPermission("soulsmp.admin") || player.isOp()){
       hasPermission = true;
     }
     switch (args.length){
       case 0:
+        //get playtime of player
         int playtime = player.getStatistic(Statistic.PLAY_ONE_MINUTE);
         playtime = playtime / 20;
+        //send converted playtime to hours and minutes
         Message.mainPrefix("du hast eine Spielzeit von <#FF9BDF>" + MessageUtils.shortInteger(playtime) + "<reset>.", player);
         return true;
       case 1:
@@ -49,14 +52,15 @@ public class PlaytimeCommand extends Command {
           ErrorMessage.noPermission(player);
           break;
         }
-
         Player targetPlayer = Bukkit.getPlayerExact(args[0]);
         if (targetPlayer == null) {
           ErrorMessage.standard("Dieser Spieler existiert nicht", player);
           break;
         }
+        //get playtime of target player
         int targetPlaytime = targetPlayer.getStatistic(Statistic.PLAY_ONE_MINUTE);
         targetPlaytime = targetPlaytime / 20;
+        //send converted playtime to hours and minutes of target player
         Message.mainPrefix("<#FF9BDF>" + targetPlayer.getName() + "</#FF9BDF> hat eine Spielzeit von <#FF9BDF>" + MessageUtils.shortInteger(targetPlaytime) + "<reset>.", player);
         return true;
 

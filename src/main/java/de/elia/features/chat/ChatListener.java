@@ -21,25 +21,32 @@ public class ChatListener implements Listener {
   LuckPerms luckPerms = LuckPermsProvider.get();
   @EventHandler
   public void onChat(AsyncPlayerChatEvent event){
+    //grab player
     Player player = event.getPlayer();
-    //event.setFormat(PlaceholderAPI.setPlaceholders(player, "&r%luckperms-prefix% &7%1$s » "));
+
+    //cancel default chatMessage
     event.setCancelled(true);
 
+    //grab raw message & player prefix
     String rawMessage = event.getMessage();
     String luckpermsPrefix = getPrefix(player);
 
+    //send new message to all players
     for (Player onlinePlayer : Bukkit.getOnlinePlayers()){
-      Message.standard(luckpermsPrefix + " <grey>»</grey> " + rawMessage, onlinePlayer);
+      Message.standard(luckpermsPrefix + " <grey>" + player.getName() + " »</grey> " + rawMessage, onlinePlayer);
     }
   }
 
   public String getPrefix(Player player) {
+    //grab user from luckperms
     User user = luckPerms.getUserManager().getUser(player.getUniqueId());
     if (user != null) {
+      //grab prefix from user
       CachedMetaData metaData = user.getCachedData().getMetaData();
       return metaData.getPrefix();
     }
-    return ""; // Leerer String, falls kein Prefix gefunden wurde
+    //empty string if no prefix
+    return "";
   }
 
 }

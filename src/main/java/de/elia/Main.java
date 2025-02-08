@@ -29,10 +29,11 @@ public class Main extends JavaPlugin {
     //set WarpManager
     warpManager = new WarpManager(instance);
 
-    //Load Commands and Events
+    //load Commands and Events
     CommandRegister.registerCommands(this.getServer());
     EventRegister.registerEvents(this);
 
+    //connect to Database
     DatabaseManager.connect();
 
     //remove restart Command

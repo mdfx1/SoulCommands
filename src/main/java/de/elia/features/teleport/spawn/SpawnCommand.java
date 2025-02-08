@@ -27,7 +27,9 @@ public class SpawnCommand extends Command {
       ErrorMessage.noPlayer(sender);
       return false;
     }
+    //get spawn
     Location spawn = Bukkit.getWorld(config.getString("default-world")).getSpawnLocation();
+    //teleport player to spawn
     player.teleport(spawn);
     return false;
   }

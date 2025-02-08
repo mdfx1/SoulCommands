@@ -24,6 +24,7 @@ public class CommandWatcherToggle extends Command {
 
   @Override
   public boolean execute(@NotNull CommandSender sender, @NotNull String commandLabel, @NotNull String[] args) {
+
     if(!(sender instanceof Player player)){
       ErrorMessage.noPlayer(sender);
       return false;
@@ -32,11 +33,14 @@ public class CommandWatcherToggle extends Command {
       ErrorMessage.noPermission(player);
       return false;
     }
+    // Toggle the players CommandWatcher
     if(!cwPlayers.contains(player)){
+      //add player to list
       cwPlayers.add(player);
       Message.mainPrefix("Du siehst nun die Commands aller Spieler!", player);
       return true;
     } else {
+      //remove player from list
       cwPlayers.remove(player);
       Message.mainPrefix("Du siehst nun nicht mehr alle Commands!", player);
       return true;

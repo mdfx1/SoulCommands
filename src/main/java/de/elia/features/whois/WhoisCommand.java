@@ -21,6 +21,8 @@ import org.jetbrains.annotations.NotNull;
 import java.io.File;
 import java.io.IOException;
 import java.net.InetAddress;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class WhoisCommand extends Command {
   public WhoisCommand(){
@@ -38,9 +40,11 @@ public class WhoisCommand extends Command {
     }
     if(!player.hasPermission("soulsmp.admin") || !player.isOp()){
       ErrorMessage.noPermission(player);
+      return false;
     }
     if(args.length != 1){
       ErrorMessage.usage("/whois [player]", player);
+      return false;
     }
     Player targetPlayer = Bukkit.getPlayerExact(args[0]);
     OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(args[0]);
@@ -62,10 +66,10 @@ public class WhoisCommand extends Command {
         //send playtime and punishment type
         Message.standard("<#FF9BDF>Playtime<grey>: " + MessageUtils.shortInteger(offlinePlayer.getStatistic(Statistic.PLAY_ONE_MINUTE)), player);
         Message.standard("<#FF9BDF>Punishment<grey>: " + DatabaseManager.getPunishmentType(offlinePlayer.getName()), player);
-        Message.standard("<#FF9BDF>Last Seen<grey>: " + offlinePlayer.getLastSeen(), player);
+        Message.standard("<#FF9BDF>Last Seen<grey>: " + MessageUtils.shortDate(offlinePlayer.getLastSeen()), player);
       }
       else {
-        Message.standard("<#FF9BDF>Last Seen<grey>: never played before", player);
+        Message.standard("<#FF9BDF>Last Seen<grey>: nicht zuvor gesehen", player);
       }
       return true;
     }
@@ -83,6 +87,7 @@ public class WhoisCommand extends Command {
     //send playtime and punishment type
     Message.standard("<#FF9BDF>Playtime<grey>: " + MessageUtils.shortInteger(targetPlayer.getStatistic(Statistic.PLAY_ONE_MINUTE)), player);
     Message.standard("<#FF9BDF>Punishment<grey>: " + DatabaseManager.getPunishmentType(targetPlayer.getName()), player);
+    //TODO add Rank
     return true;
   }
 }

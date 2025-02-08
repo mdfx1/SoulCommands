@@ -30,6 +30,7 @@ public class TpaDenyCommand extends Command {
     switch (args.length){
       case 0:
         boolean requested = false;
+        //deny all open tpa requests
         for (Map.Entry<Player, Player> entry : TpaCommand.getPending().entrySet()) {
           if (entry.getValue().equals(player)) {
             Player targetPlayer = entry.getKey();
@@ -44,12 +45,13 @@ public class TpaDenyCommand extends Command {
         }
         break;
       case 1:
+        //deny tpa request from targetPlayer
         Player targetPlayer = Bukkit.getPlayerExact(args[0]);
         if (targetPlayer == null) {
           ErrorMessage.standard("Dieser Spieler existiert nicht", player);
           return false;
         }
-
+        //only deny if player has a pending request from targetPlayer
         if(TpaCommand.getPending().get(targetPlayer) != null &&   TpaCommand.getPending().get(targetPlayer).equals(player)){
           TpaCommand.getPending().remove(targetPlayer, player);
           Message.standard("<grey>anfrage abgelehnt", player);

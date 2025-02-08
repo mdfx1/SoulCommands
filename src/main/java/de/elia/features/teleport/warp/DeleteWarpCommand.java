@@ -37,7 +37,9 @@ public class DeleteWarpCommand extends Command {
       ErrorMessage.usage("/delwarp [warp]", player);
       return false;
     }
+    //remove warp if it exists
     if(warpManager.removeWarp(args[0])){
+      //save warps
       warpManager.saveWarps();
       Message.mainPrefix("Du hast den Warp <#FF9BDF>" + args[0] + "</#FF9BDF> gelöscht", player);
       return true;

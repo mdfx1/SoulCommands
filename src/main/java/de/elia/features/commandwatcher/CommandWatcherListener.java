@@ -60,7 +60,7 @@ public class CommandWatcherListener implements Listener {
       if(Main.server.getCommandMap().getCommand(bareCommand) == null){
         return;
       }
-
+      //send Message
       Message.cwPrefix("<dark_aqua>" + sender.getName() + "</dark_aqua> <dark_grey>»</dark_grey> <grey>" + command + "</grey>", watchPlayer);
 
     });

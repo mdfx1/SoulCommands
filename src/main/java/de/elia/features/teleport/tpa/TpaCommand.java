@@ -25,6 +25,7 @@ public class TpaCommand extends Command {
   }
 
   MiniMessage miniMessage = MiniMessage.miniMessage();
+  //map for pending tpa requests
   private static Map<Player, Player> pending = new HashMap<>();
 
   @Override
@@ -39,19 +40,23 @@ public class TpaCommand extends Command {
       return false;
     }
 
+    //check if targetPlayer exists
     Player targetPlayer = Bukkit.getPlayerExact(args[0]);
     if (targetPlayer == null) {
       ErrorMessage.standard("Dieser Spieler existiert nicht", player);
       return false;
     }
+    //check if player already has a pending request to targetPlayer
     if (pending.containsKey(player) && pending.containsValue(targetPlayer)) {
       ErrorMessage.standard("Du hast bereits eine ausstehende Anfrage an diesen Spieler", player);
       return false;
     }
 
+    //add player and targetPlayer to pending
     pending.put(player, targetPlayer);
     Message.standard("<grey>tpa gesendet...", player);
 
+    //send message to targetPlayer
     Component message = miniMessage.deserialize("du hast eine tpa von <#FF9BDF>" + player.getName() + "</#FF9BDF> erhalten. ");
     Component slash = miniMessage.deserialize("/");
     Component accept = miniMessage.deserialize("<#FF9BDF>annehmen</#FF9BDF>").clickEvent(ClickEvent.runCommand("/tpaaccept " + player.getName())).hoverEvent(HoverEvent.showText(miniMessage.deserialize("<grey>klick hier")));
