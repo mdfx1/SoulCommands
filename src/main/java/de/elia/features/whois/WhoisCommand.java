@@ -10,6 +10,12 @@ import de.elia.systemclasses.DatabaseManager;
 import de.elia.utils.ErrorMessage;
 import de.elia.utils.Message;
 import de.elia.utils.MessageUtils;
+import net.luckperms.api.LuckPerms;
+import net.luckperms.api.LuckPermsProvider;
+import net.luckperms.api.cacheddata.CachedMetaData;
+import net.luckperms.api.model.user.User;
+import net.luckperms.api.query.QueryMode;
+import net.luckperms.api.query.QueryOptions;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.Statistic;
@@ -32,6 +38,9 @@ public class WhoisCommand extends Command {
   protected WhoisCommand(@NotNull String name) {
     super(name);
   }
+
+  LuckPerms luckPerms = LuckPermsProvider.get();
+
   @Override
   public boolean execute(@NotNull CommandSender sender, @NotNull String s, @NotNull String @NotNull [] args) {
     if(!(sender instanceof Player player)){
@@ -63,6 +72,7 @@ public class WhoisCommand extends Command {
         int z = offlinePlayer.getLocation().getBlockZ();
         Message.standard("<#FF9BDF>Coordinates: <grey>" + x + ", " + y + ", " + z, player);
 
+
         //send playtime and punishment type
         Message.standard("<#FF9BDF>Playtime<grey>: " + MessageUtils.shortInteger(offlinePlayer.getStatistic(Statistic.PLAY_ONE_MINUTE)), player);
         Message.standard("<#FF9BDF>Punishment<grey>: " + DatabaseManager.getPunishmentType(offlinePlayer.getName()), player);
@@ -87,7 +97,18 @@ public class WhoisCommand extends Command {
     //send playtime and punishment type
     Message.standard("<#FF9BDF>Playtime<grey>: " + MessageUtils.shortInteger(targetPlayer.getStatistic(Statistic.PLAY_ONE_MINUTE)), player);
     Message.standard("<#FF9BDF>Punishment<grey>: " + DatabaseManager.getPunishmentType(targetPlayer.getName()), player);
-    //TODO add Rank
+    Message.standard("<#FF9BDF>Rank<grey>: <reset>" + getPrefix(targetPlayer), player);
     return true;
+  }
+  public String getPrefix(Player player) {
+    //grab user from luckperms
+    User user = luckPerms.getUserManager().getUser(player.getUniqueId());
+    if (user != null) {
+      //grab prefix from user
+      CachedMetaData metaData = user.getCachedData().getMetaData();
+      return metaData.getPrefix();
+    }
+    //empty string if no prefix
+    return "";
   }
 }
