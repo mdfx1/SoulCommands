@@ -6,6 +6,7 @@ import com.maxmind.geoip2.exception.GeoIp2Exception;
 import com.maxmind.geoip2.model.CityResponse;
 import com.maxmind.geoip2.record.City;
 import com.maxmind.geoip2.record.Country;
+import de.elia.Main;
 import de.elia.systemclasses.DatabaseManager;
 import de.elia.utils.ErrorMessage;
 import de.elia.utils.Message;
@@ -63,8 +64,6 @@ public class WhoisCommand extends Command {
       Message.mainPrefix("<#FF9BDF>" + offlinePlayer.getName() + "<grey>'s info:", player);
       if(offlinePlayer.hasPlayedBefore()){
         //only if player has played before
-        //TODO change last seen long mit shortint method
-        //TODO add region (maybe with GeoLite db)
 
         //send Coords
         int x = offlinePlayer.getLocation().getBlockX();
@@ -75,7 +74,7 @@ public class WhoisCommand extends Command {
 
         //send playtime and punishment type
         Message.standard("<#FF9BDF>Playtime<grey>: " + MessageUtils.shortInteger(offlinePlayer.getStatistic(Statistic.PLAY_ONE_MINUTE)), player);
-        Message.standard("<#FF9BDF>Punishment<grey>: " + DatabaseManager.getPunishmentType(offlinePlayer.getName()), player);
+        Message.standard("<#FF9BDF>Punishment<grey>: " + Main.getDatabaseManager().getPunishmentType(offlinePlayer.getName()), player);
         Message.standard("<#FF9BDF>Last Seen<grey>: " + MessageUtils.shortDate(offlinePlayer.getLastSeen()), player);
       }
       else {
@@ -96,7 +95,7 @@ public class WhoisCommand extends Command {
 
     //send playtime and punishment type
     Message.standard("<#FF9BDF>Playtime<grey>: " + MessageUtils.shortInteger(targetPlayer.getStatistic(Statistic.PLAY_ONE_MINUTE)), player);
-    Message.standard("<#FF9BDF>Punishment<grey>: " + DatabaseManager.getPunishmentType(targetPlayer.getName()), player);
+    Message.standard("<#FF9BDF>Punishment<grey>: " + Main.getDatabaseManager().getPunishmentType(targetPlayer.getName()), player);
     Message.standard("<#FF9BDF>Rank<grey>: <reset>" + getPrefix(targetPlayer), player);
     return true;
   }

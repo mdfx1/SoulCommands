@@ -13,7 +13,7 @@ public class DatabaseManager {
     private static final String USERNAME = "soulplugins";
     private static final String PASSWORD = "Yu4!4Apu61li.OQOME?u@E3a7APOY!";
 
-    public static void connect() {
+    public void connect() {
         try {
             String url = "jdbc:mysql://" + HOST + ":" + PORT + "/" + DATABASE;
             connection = DriverManager.getConnection(url, USERNAME, PASSWORD);
@@ -23,7 +23,7 @@ public class DatabaseManager {
         }
     }
 
-    public static void disconnect() {
+    public void disconnect() {
         try {
             if (connection != null) {
                 connection.close();
@@ -34,7 +34,7 @@ public class DatabaseManager {
     }
 
     // Example: Get punishment type for a player
-    public static String getPunishmentType(String playerName) {
+    public String getPunishmentType(String playerName) {
         String punishmentType = null;
 
         try {

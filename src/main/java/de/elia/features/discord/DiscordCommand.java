@@ -34,12 +34,8 @@ public class DiscordCommand extends Command {
       ErrorMessage.noPlayer(sender);
       return false;
     }
-    //set components for the message
-    Component discordComponent = miniMessage.deserialize("<blue>Discord</blue>").clickEvent(ClickEvent.openUrl("https://discord.gg/soul-smp-minecraft-850364001195261993")).hoverEvent(HoverEvent.showText(miniMessage.deserialize("<grey><italic>https://discord.gg/soul-smp-minecraft-850364001195261993")));
-    Component messageComponent = miniMessage.deserialize("<gray>unser Discord » ");
-    //send message
-    Message.mainPrefix(messageComponent.append(discordComponent), player);
-
+    //send discord link
+    Message.discord(player);
     return true;
   }
 }

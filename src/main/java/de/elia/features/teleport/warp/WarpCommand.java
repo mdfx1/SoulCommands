@@ -35,7 +35,7 @@ public class WarpCommand extends Command {
       ErrorMessage.noPlayer(sender);
       return false;
     }
-    if(args.length == 1){
+    if(args.length != 1){
       ErrorMessage.usage("/warp [warp]", player);
       return false;
     }

@@ -9,7 +9,12 @@ import de.elia.features.fly.FlyCommand;
 import de.elia.features.fly.FlySpeedCommand;
 import de.elia.features.heal.HealCommand;
 import de.elia.features.invsee.InvseeCommand;
+import de.elia.features.playerhead.PlayerHeadCommand;
 import de.elia.features.playtime.PlaytimeCommand;
+import de.elia.features.sign.ItemNameCommand;
+import de.elia.features.sign.SignCommand;
+import de.elia.features.teleport.back.BackCommand;
+import de.elia.features.teleport.otp.OfflineTpCommand;
 import de.elia.features.teleport.spawn.SetSpawnCommand;
 import de.elia.features.teleport.spawn.SpawnCommand;
 import de.elia.features.teleport.tpa.TpaAcceptCommand;
@@ -53,6 +58,12 @@ public class CommandRegister {
     COMMANDS.put("warp", new WarpCommand());
     COMMANDS.put("setwarp", new SetWarpCommand());
     COMMANDS.put("delwarp", new DeleteWarpCommand());
+    COMMANDS.put("back", new BackCommand());
+    COMMANDS.put("otp", new OfflineTpCommand());
+    COMMANDS.put("sign", new SignCommand());
+    COMMANDS.put("iname", new ItemNameCommand());
+    COMMANDS.put("playerhead", new PlayerHeadCommand());
+
   }
 
   public static void registerCommand(@NotNull String name, @NotNull Command command, @NotNull Server server){

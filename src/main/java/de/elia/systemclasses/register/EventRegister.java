@@ -3,6 +3,7 @@ package de.elia.systemclasses.register;
 import de.elia.features.chat.ChatListener;
 import de.elia.features.commandwatcher.CommandWatcherListener;
 
+import de.elia.features.teleport.back.TeleportListener;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
@@ -21,6 +22,7 @@ public class EventRegister {
   static {
     EVENTS.add(new CommandWatcherListener());
     EVENTS.add(new ChatListener());
+    EVENTS.add(new TeleportListener());
   }
 
   public static void registerEvents(@NotNull PluginManager pluginManager, @NotNull Plugin plugin){

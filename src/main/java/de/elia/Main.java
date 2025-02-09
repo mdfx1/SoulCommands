@@ -1,5 +1,6 @@
 package de.elia;
 
+import de.elia.features.teleport.back.BackManager;
 import de.elia.features.teleport.warp.WarpManager;
 import de.elia.systemclasses.DatabaseManager;
 import de.elia.systemclasses.register.CommandRegister;
@@ -19,6 +20,8 @@ public class Main extends JavaPlugin {
   public static Server server;
   final PluginLogger soulLogger = new PluginLogger("SoulCommand-Logger");
   private static WarpManager warpManager;
+  private static BackManager backManager;
+  private static DatabaseManager databaseManager;
 
   @Override
   public void onEnable(){
@@ -26,6 +29,8 @@ public class Main extends JavaPlugin {
     instance = this;
     server = this.getServer();
 
+    //set BackManager
+    backManager = new BackManager();
     //set WarpManager
     warpManager = new WarpManager(instance);
 
@@ -34,7 +39,9 @@ public class Main extends JavaPlugin {
     EventRegister.registerEvents(this);
 
     //connect to Database
-    DatabaseManager.connect();
+    //TODO fix connection (use connector object)
+    databaseManager = new DatabaseManager();
+    databaseManager.connect();
 
     //remove restart Command
     this.getServer().getCommandMap().getKnownCommands().remove("restart");
@@ -44,12 +51,17 @@ public class Main extends JavaPlugin {
   public void onDisable(){
     CommandRegister.unregisterCommands(this.getServer());
 
-    DatabaseManager.disconnect();
+    databaseManager.disconnect();
   }
 
   @NotNull
   public static WarpManager getWarpManager() {
     return warpManager;
+  }
+
+  @NotNull
+  public static BackManager getBackManager() {
+    return backManager;
   }
 
   @NotNull
@@ -61,4 +73,8 @@ public class Main extends JavaPlugin {
     return soulLogger;
   }
 
+  @NotNull
+  public static DatabaseManager getDatabaseManager() {
+    return databaseManager;
+  }
 }

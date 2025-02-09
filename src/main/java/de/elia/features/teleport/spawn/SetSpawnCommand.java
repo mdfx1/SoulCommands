@@ -54,8 +54,8 @@ public class SetSpawnCommand extends Command {
         //set spawn according to given coordinates
         try {
           x = Integer.parseInt(args[0]);
-          y = Integer.parseInt(args[0]);
-          z = Integer.parseInt(args[0]);
+          y = Integer.parseInt(args[1]);
+          z = Integer.parseInt(args[2]);
         } catch (NumberFormatException e){
           ErrorMessage.standard(e.getMessage(), player);
           return false;
@@ -67,9 +67,9 @@ public class SetSpawnCommand extends Command {
         //set spawn according to given coordinates and angle
         try {
           x = Integer.parseInt(args[0]);
-          y = Integer.parseInt(args[0]);
-          z = Integer.parseInt(args[0]);
-          angle = Float.parseFloat(args[0]);
+          y = Integer.parseInt(args[1]);
+          z = Integer.parseInt(args[2]);
+          angle = Float.parseFloat(args[3]);
         } catch (NumberFormatException e){
           ErrorMessage.standard(e.getMessage(), player);
           return false;

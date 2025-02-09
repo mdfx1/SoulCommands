@@ -2,6 +2,8 @@ package de.elia.utils;
 
 import de.elia.Main;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.event.ClickEvent;
+import net.kyori.adventure.text.event.HoverEvent;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -35,6 +37,13 @@ public class Message {
   public static void errorPrefix(String messageIn, CommandSender sender) {
     Component messageOut = miniMessage.deserialize(messageIn);
     sender.sendMessage(miniMessage.deserialize("<dark_grey>[</dark_grey><gradient:#A01B1B:#E75656><bold>Error</bold><dark_grey>]</dark_grey> ").append(messageOut));
+  }
+  public static void discord(Player playerIn) {
+    //set components for the message
+    Component discordComponent = miniMessage.deserialize("<blue>Discord</blue>").clickEvent(ClickEvent.openUrl("https://discord.gg/soul-smp-minecraft-850364001195261993")).hoverEvent(HoverEvent.showText(miniMessage.deserialize("<grey><italic>https://discord.gg/soul-smp-minecraft-850364001195261993")));
+    Component messageComponent = miniMessage.deserialize("<gray>unser Discord » ");
+    //send message
+    playerIn.sendMessage(messageComponent.append(discordComponent));
   }
 
 
