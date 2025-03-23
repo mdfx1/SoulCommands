@@ -34,7 +34,7 @@ public class CommandWatcherListener implements Listener {
 
     Bukkit.getOnlinePlayers().forEach(watchPlayer -> {
       //only send Command to those who have command watch active and have the permission
-      if((!watchPlayer.hasPermission("soulsmp.admin") || watchPlayer.isOp()) && !CommandWatcherToggle.cwPlayers.contains(watchPlayer)) {
+      if((!watchPlayer.hasPermission("soulsmp.commandwatch") || watchPlayer.isOp()) && !CommandWatcherToggle.cwPlayers.contains(watchPlayer)) {
         return;
       }
       //check so that admin don't see their own commands

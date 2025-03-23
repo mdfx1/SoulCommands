@@ -22,7 +22,7 @@ public class FlyCommand extends Command {
       ErrorMessage.noPlayer(sender);
       return false;
     }
-    if(!player.hasPermission("soulsmp.admin") || !player.isOp()){
+    if(!player.hasPermission("soulsmp.fly") || !player.isOp()){
       ErrorMessage.noPermission(player);
       return false;
     }

@@ -8,7 +8,6 @@ import de.elia.features.enderchest.EnderchestCommand;
 import de.elia.features.fly.FlyCommand;
 import de.elia.features.fly.FlySpeedCommand;
 import de.elia.features.heal.HealCommand;
-import de.elia.features.invsee.InvseeCommand;
 import de.elia.features.playerhead.PlayerHeadCommand;
 import de.elia.features.playtime.PlaytimeCommand;
 import de.elia.features.sign.ItemNameCommand;

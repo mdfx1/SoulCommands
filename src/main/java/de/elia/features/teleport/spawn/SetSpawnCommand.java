@@ -30,7 +30,7 @@ public class SetSpawnCommand extends Command {
       ErrorMessage.noPlayer(sender);
       return false;
     }
-    if(!player.hasPermission("soulsmp.admin") || !player.isOp()){
+    if(!player.hasPermission("soulsmp.setspawn") || !player.isOp()){
       ErrorMessage.noPermission(player);
       return false;
     }

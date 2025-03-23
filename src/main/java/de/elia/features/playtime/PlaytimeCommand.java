@@ -36,7 +36,7 @@ public class PlaytimeCommand extends Command {
       return false;
     }
     //set permission for later use
-    if(player.hasPermission("soulsmp.admin") || player.isOp()){
+    if(player.hasPermission("soulsmp.playtime") || player.isOp()){
       hasPermission = true;
     }
     switch (args.length){

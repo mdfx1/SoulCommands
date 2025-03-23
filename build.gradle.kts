@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "de.elia"
-version = "2.0.0"
+version = "2.0.1"
 description = "SoulSMP Tools"
 
 java {

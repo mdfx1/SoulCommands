@@ -18,7 +18,7 @@ public class DeleteWarpCommand extends Command {
   }
 
   public DeleteWarpCommand(){
-    this("delwarp");
+    this("warp");
   }
 
   private WarpManager warpManager = Main.getWarpManager();

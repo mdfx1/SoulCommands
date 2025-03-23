@@ -3,7 +3,7 @@ main: de.elia.Main
 bootstrapper: de.elia.systemclasses.BootsTrapper
 loader: de.elia.systemclasses.Loader
 api-version: '1.20'
-version: '2.0.0'
+version: '2.0.1'
 authors:
   - Elia
   - Gemmerr

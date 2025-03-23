@@ -20,7 +20,7 @@ public class SetWarpCommand extends Command {
     }
 
     public SetWarpCommand(){
-        this("setwarp");
+        this("warp");
     }
 
     private WarpManager warpManager = Main.getWarpManager();

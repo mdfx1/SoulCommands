@@ -24,6 +24,10 @@ public class OfflineTpCommand extends Command {
       ErrorMessage.noPlayer(sender);
       return false;
     }
+    if (!player.hasPermission("soulsmp.offlinetp")){
+      ErrorMessage.noPermission(sender);
+      return false;
+    }
     if(args.length != 1){
       ErrorMessage.usage("/otp [player]", player);
       return false;

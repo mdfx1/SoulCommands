@@ -48,7 +48,7 @@ public class WhoisCommand extends Command {
       ErrorMessage.noPlayer(sender);
       return false;
     }
-    if(!player.hasPermission("soulsmp.admin") || !player.isOp()){
+    if(!player.hasPermission("soulsmp.whois") || !player.isOp()){
       ErrorMessage.noPermission(player);
       return false;
     }
@@ -73,7 +73,9 @@ public class WhoisCommand extends Command {
 
 
         //send playtime and punishment type
-        Message.standard("<#FF9BDF>Playtime<grey>: " + MessageUtils.shortInteger(offlinePlayer.getStatistic(Statistic.PLAY_ONE_MINUTE)), player);
+        int playtime = offlinePlayer.getStatistic(Statistic.PLAY_ONE_MINUTE);
+        playtime = playtime / 20;
+        Message.standard("<#FF9BDF>Playtime<grey>: " + MessageUtils.shortInteger(playtime), player);
         Message.standard("<#FF9BDF>Punishment<grey>: " + Main.getDatabaseManager().getPunishmentType(offlinePlayer.getName()), player);
         Message.standard("<#FF9BDF>Last Seen<grey>: " + MessageUtils.shortDate(offlinePlayer.getLastSeen()), player);
       }
@@ -94,7 +96,10 @@ public class WhoisCommand extends Command {
     Message.standard("<#FF9BDF>Coordinates: <grey>" + x + ", " + y + ", " + z, player);
 
     //send playtime and punishment type
-    Message.standard("<#FF9BDF>Playtime<grey>: " + MessageUtils.shortInteger(targetPlayer.getStatistic(Statistic.PLAY_ONE_MINUTE)), player);
+    int playtime = targetPlayer.getStatistic(Statistic.PLAY_ONE_MINUTE);
+    playtime = playtime / 20;
+
+    Message.standard("<#FF9BDF>Playtime<grey>: " + MessageUtils.shortInteger(playtime), player);
     Message.standard("<#FF9BDF>Punishment<grey>: " + Main.getDatabaseManager().getPunishmentType(targetPlayer.getName()), player);
     Message.standard("<#FF9BDF>Rank<grey>: <reset>" + getPrefix(targetPlayer), player);
     return true;

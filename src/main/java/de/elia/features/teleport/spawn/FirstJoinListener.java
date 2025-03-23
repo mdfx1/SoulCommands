@@ -15,7 +15,7 @@ public class FirstJoinListener implements Listener {
     if(player.hasPlayedBefore()){
       return;
     }
-    Message.standard("Willkommen auf dem Server! Joine gerne unserem Discord für mehr Information oder such dir gleich eine Nation", player);
+    Message.standard("Willkommen auf dem Server! Joine gerne unserem Discord durch den /discord Command für mehr Information oder such dir dort gleich eine Nation. Wir freuen uns ^^", player);
     Message.discord(player);
   }
 }
