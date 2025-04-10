@@ -29,7 +29,7 @@ public class CommandWatcherToggle extends Command {
       ErrorMessage.noPlayer(sender);
       return false;
     }
-    if(!player.hasPermission("soulsmp.commandwatch") || !player.isOp()){
+    if(!player.hasPermission("soulsmp.commandwatch") && !player.isOp()){
       ErrorMessage.noPermission(player);
       return false;
     }
