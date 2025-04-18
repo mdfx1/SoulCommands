@@ -78,15 +78,16 @@ public class IPLookUpCommand extends Command {
             sender.sendMessage("Fehler: " + json.get("message").getAsString());
             return;
           }
-          sender.sendMessage("IP-Adresse: " + ip);
-          sender.sendMessage("Land: " + json.get("country").getAsString());
-          sender.sendMessage("Region: " + json.get("regionName").getAsString());
-          sender.sendMessage("Stadt: " + json.get("city").getAsString());
-          sender.sendMessage("ISP: " + json.get("isp").getAsString());
-          sender.sendMessage("Proxy: " + (json.get("proxy").getAsBoolean() ? "Ja" : "Nein"));
-          sender.sendMessage("Mobile IP: " + (json.get("mobile").getAsBoolean() ? "Ja" : "Nein"));
-          sender.sendMessage("Koordinaten: " + json.get("lat").getAsDouble() + ", " + json.get("lon").getAsDouble());
-          sender.sendMessage("Zeitzone: " + json.get("timezone").getAsString());
+          Message.mainPrefix("<#FF9BDF>" + targetName + "<grey>'s ip info:", sender);
+          Message.standard("<#FF9BDF>IP-Adresse: <grey>" + ip, sender);
+          Message.standard("<#FF9BDF>Land: <grey>" + json.get("country").getAsString(), sender);
+          Message.standard("<#FF9BDF>Region: <grey>" + json.get("regionName").getAsString(), sender);
+          Message.standard("<#FF9BDF>Stadt: <grey>" + json.get("city").getAsString(), sender);
+          Message.standard("<#FF9BDF>ISP: <grey>" + json.get("isp").getAsString(), sender);
+          Message.standard("<#FF9BDF>Proxy: <grey>" + (json.get("proxy").getAsBoolean() ? "Ja" : "Nein"), sender);
+          Message.standard("<#FF9BDF>Mobil: <grey>" + (json.get("mobile").getAsBoolean() ? "Ja" : "Nein"), sender);
+          Message.standard("<#FF9BDF>Koordinaten: <grey>" + json.get("lat").getAsDouble() + ", " + json.get("lon").getAsDouble(), sender);
+          Message.standard("<#FF9BDF>Zeitzone: <grey>" + json.get("timezone").getAsString(), sender);
         }
       } catch (Exception e) {
         sender.sendMessage("Fehler beim Abrufen der IP-Daten");

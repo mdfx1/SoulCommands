@@ -1,6 +1,7 @@
 package de.elia.features.whois;
 
 import de.elia.Main;
+import de.elia.systemclasses.DatabaseManager;
 import de.elia.utils.ErrorMessage;
 import de.elia.utils.Message;
 import de.elia.utils.MessageUtils;
@@ -53,7 +54,13 @@ public class WhoisCommand extends Command {
             //only for offline players
             Message.mainPrefix("<#FF9BDF>" + offlinePlayer.getName() + "<grey>'s info:", player);
             if (offlinePlayer.hasPlayedBefore()) {
-                //only if player has played before
+
+                String ip = Main.getDatabaseManager().getIP(offlinePlayer.getName());
+                if (ip == null) {
+                    Message.standard("<#FF9BDF>IP<grey>: nicht gefunden", player);
+                } else {
+                    Message.standard("<#FF9BDF>IP<grey>: " + ip, player);
+                }
 
                 //send Coords
                 int x = offlinePlayer.getLocation().getBlockX();
@@ -72,7 +79,11 @@ public class WhoisCommand extends Command {
                 Message.standard("<#FF9BDF>First Join<grey>: " + date, player);
 
                 try {
-                    Message.standard("<#FF9BDF>Punishment<grey>: " + Main.getDatabaseManager().getPunishmentType(offlinePlayer.getName()), player);
+                    String punishmentType = Main.getDatabaseManager().getPunishmentType(offlinePlayer.getName());
+                    if (punishmentType == null) {
+                        punishmentType = "keine";
+                    }
+                    Message.standard("<#FF9BDF>Punishment<grey>: " + punishmentType, player);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
