@@ -22,6 +22,7 @@ import de.elia.features.teleport.tpa.TpaDenyCommand;
 import de.elia.features.teleport.warp.DeleteWarpCommand;
 import de.elia.features.teleport.warp.SetWarpCommand;
 import de.elia.features.teleport.warp.WarpCommand;
+import de.elia.features.whois.IPLookUpCommand;
 import de.elia.features.whois.WhoisCommand;
 import io.papermc.paper.configuration.WorldConfiguration;
 import org.bukkit.Bukkit;
@@ -62,6 +63,7 @@ public class CommandRegister {
     COMMANDS.put("sign", new SignCommand());
     COMMANDS.put("iname", new ItemNameCommand());
     COMMANDS.put("playerhead", new PlayerHeadCommand());
+    COMMANDS.put("iplookup", new IPLookUpCommand());
 
   }
 

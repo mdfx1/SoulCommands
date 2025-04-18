@@ -51,6 +51,10 @@ public class Message {
     Component messageOut = miniMessage.deserialize(messageIn);
     playerIn.sendMessage(messageOut);
   }
+  public static void standard(String messageIn, CommandSender sender) {
+    Component messageOut = miniMessage.deserialize(messageIn);
+    sender.sendMessage(messageOut);
+  }
   public static void standard(Component messageIn, Player playerIn) {
     playerIn.sendMessage(messageIn);
   }
