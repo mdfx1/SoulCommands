@@ -33,7 +33,6 @@ public class Main extends JavaPlugin {
     backManager = new BackManager();
     //set WarpManager
     warpManager = new WarpManager(instance);
-
     //load Commands and Events
     CommandRegister.registerCommands(this.getServer());
     EventRegister.registerEvents(this);

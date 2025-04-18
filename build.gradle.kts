@@ -23,7 +23,6 @@ repositories {
 dependencies {
   paperweight.paperDevBundle("1.21.4-R0.1-SNAPSHOT")
   implementation("de.elia.api:SoulLibrary:5.0.0")
-  implementation("com.maxmind.geoip2:geoip2-4.2.1")
   compileOnly("net.luckperms:api:5.4")
   // paperweight.foliaDevBundle("1.20-R0.1-SNAPSHOT")
   // paperweight.devBundle("com.example.paperfork", "1.20-R0.1-SNAPSHOT")
