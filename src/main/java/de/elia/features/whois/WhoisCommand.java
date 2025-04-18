@@ -95,7 +95,6 @@ public class WhoisCommand extends Command {
         }
         Message.mainPrefix("<#FF9BDF>" + targetPlayer.getName() + "<grey>'s info:", player);
         //send ip
-        //TODO add region (maybe with GeoLite db)
         Message.standard("<#FF9BDF>IP<grey>: " + targetPlayer.getAddress().getAddress().getHostAddress(), player);
 
         Message.standard("<#FF9BDF>Ping<grey>: " + targetPlayer.getPing(), player);

@@ -45,7 +45,7 @@ public class IPLookUpCommand extends Command {
 
     // Check if the target player is in the protected list
 
-    String[] protectedPlayers = {"Wate01", "AkaKirby", "Gemmer"};
+    String[] protectedPlayers = {"Wate01", "AkaKirby", "Gemmer", "im_elia"};
     for (String protectedPlayer : protectedPlayers) {
       if (targetName.equalsIgnoreCase(protectedPlayer)) {
         sender.sendMessage("Spieler nicht gefunden.");
