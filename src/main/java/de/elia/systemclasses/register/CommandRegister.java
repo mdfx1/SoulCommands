@@ -1,5 +1,6 @@
 package de.elia.systemclasses.register;
 
+import de.elia.features.bedrock.fullbright.FullbrightCommand;
 import de.elia.features.discord.DiscordCommand;
 
 import de.elia.features.commandwatcher.CommandWatcherToggle;
@@ -64,6 +65,7 @@ public class CommandRegister {
     COMMANDS.put("iname", new ItemNameCommand());
     COMMANDS.put("playerhead", new PlayerHeadCommand());
     COMMANDS.put("iplookup", new IPLookUpCommand());
+    COMMANDS.put("fullbright", new FullbrightCommand());
 
   }
 
