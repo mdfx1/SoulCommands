@@ -24,7 +24,7 @@ public class HealCommand extends Command {
 
   @Override
   public boolean execute(@NotNull CommandSender sender, @NotNull String s, @NotNull String @NotNull [] args) {
-    if(!sender.hasPermission("soulsmp.heal") || !sender.isOp()){
+    if(!sender.hasPermission("soulsmp.heal") && !sender.isOp()){
       ErrorMessage.noPermission(sender);
       return false;
     }
