@@ -1,5 +1,6 @@
 package de.elia.systemclasses.register;
 
+import de.elia.features.bedrock.fullbright.FbRespawnListener;
 import de.elia.features.chat.ChatListener;
 import de.elia.features.commandwatcher.CommandWatcherListener;
 
@@ -23,6 +24,7 @@ public class EventRegister {
     EVENTS.add(new CommandWatcherListener());
     EVENTS.add(new ChatListener());
     EVENTS.add(new TeleportListener());
+    EVENTS.add(new FbRespawnListener());
   }
 
   public static void registerEvents(@NotNull PluginManager pluginManager, @NotNull Plugin plugin){
