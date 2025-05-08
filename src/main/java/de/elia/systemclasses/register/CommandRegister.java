@@ -20,6 +20,7 @@ import de.elia.features.teleport.spawn.SpawnCommand;
 import de.elia.features.teleport.tpa.TpaAcceptCommand;
 import de.elia.features.teleport.tpa.TpaCommand;
 import de.elia.features.teleport.tpa.TpaDenyCommand;
+import de.elia.features.teleport.tpa.TpaHereCommand;
 import de.elia.features.teleport.warp.DeleteWarpCommand;
 import de.elia.features.teleport.warp.SetWarpCommand;
 import de.elia.features.teleport.warp.WarpCommand;
@@ -66,7 +67,7 @@ public class CommandRegister {
     COMMANDS.put("playerhead", new PlayerHeadCommand());
     COMMANDS.put("iplookup", new IPLookUpCommand());
     COMMANDS.put("fullbright", new FullbrightCommand());
-
+    COMMANDS.put("tpahere", new TpaHereCommand());
   }
 
   public static void registerCommand(@NotNull String name, @NotNull Command command, @NotNull Server server){

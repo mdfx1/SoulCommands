@@ -6,6 +6,7 @@ import de.elia.systemclasses.DatabaseManager;
 import de.elia.systemclasses.register.CommandRegister;
 import de.elia.systemclasses.register.EventRegister;
 import de.elia.api.logging.PluginLogger;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -54,7 +55,9 @@ public class Main extends JavaPlugin {
   public void onDisable(){
     CommandRegister.unregisterCommands(this.getServer());
 
-    Bukkit.getOnlinePlayers().forEach(Player::kick);
+    Bukkit.getOnlinePlayers().forEach(player -> {
+      player.kick(Component.text("der Server startet neu!"), PlayerKickEvent.Cause.RESTART_COMMAND);
+    });
 
     databaseManager.disconnect();
   }

@@ -27,6 +27,7 @@ public class TpaCommand extends Command {
   MiniMessage miniMessage = MiniMessage.miniMessage();
   //map for pending tpa requests
   private static Map<Player, Player> pending = new HashMap<>();
+  private static Map<Player, Player> pendingHere = new HashMap<>();
 
   @Override
   public boolean execute(@NotNull CommandSender sender, @NotNull String commandLabel, @NotNull String @NotNull [] args) {
@@ -70,4 +71,9 @@ public class TpaCommand extends Command {
   public static Map<Player, Player> getPending() {
     return pending;
   }
+
+  public static Map<Player, Player> getPendingHere() {
+    return pendingHere;
+  }
+
 }

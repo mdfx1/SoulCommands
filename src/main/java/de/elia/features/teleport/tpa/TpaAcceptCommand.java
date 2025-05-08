@@ -29,19 +29,28 @@ public class TpaAcceptCommand extends Command {
 
     switch (args.length){
       case 0:
-        //accept all open tpa requests
+        //accept all open tpa and tpahere requests
         boolean requested = false;
+        // Handle TPA requests
         for (Map.Entry<Player, Player> entry : TpaCommand.getPending().entrySet()) {
           if (entry.getValue().equals(player)) {
-            //all entry's with player as target
             entry.getKey().teleport(player);
             TpaCommand.getPending().remove(entry.getKey(), player);
             Message.standard("<grey>teleportiere...", entry.getKey());
             requested = true;
           }
         }
+        // Handle TPAHere requests
+        for (Map.Entry<Player, Player> entry : TpaCommand.getPendingHere().entrySet()) {
+          if (entry.getValue().equals(player)) {
+            player.teleport(entry.getKey());
+            TpaCommand.getPendingHere().remove(entry.getKey(), player);
+            Message.standard("<grey>teleportiere...", player);
+            requested = true;
+          }
+        }
         if(!requested){
-          ErrorMessage.standard("Niemand möchte sich zu dir teleportieren", player);
+          ErrorMessage.standard("Niemand möchte sich zu dir teleportieren oder dich zu sich teleportieren", player);
         }
         break;
       case 1:
@@ -51,14 +60,22 @@ public class TpaAcceptCommand extends Command {
           return false;
         }
 
-        //only accept if player has a pending request from targetPlayer
+        // Check for TPA request
         if(TpaCommand.getPending().get(targetPlayer) != null && TpaCommand.getPending().get(targetPlayer).equals(player)){
           TpaCommand.getPending().remove(targetPlayer, player);
           targetPlayer.teleport(player);
           Message.standard("<grey>teleportiere...", targetPlayer);
-        } else{
-          ErrorMessage.standard("Dieser Spieler möchte sich nicht zu dir teleportieren", player);
+          return true;
         }
+        // Check for TPAHere request
+        if(TpaCommand.getPendingHere().get(targetPlayer) != null && TpaCommand.getPendingHere().get(targetPlayer).equals(player)){
+          TpaCommand.getPendingHere().remove(targetPlayer, player);
+          player.teleport(targetPlayer);
+          Message.standard("<grey>teleportiere...", player);
+          return true;
+        }
+
+        ErrorMessage.standard("Dieser Spieler möchte sich nicht zu dir teleportieren oder dich zu sich teleportieren", player);
         break;
       default:
         ErrorMessage.usage("/tpaaccept [player]", player);
