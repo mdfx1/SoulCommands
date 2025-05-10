@@ -9,6 +9,8 @@ import de.elia.features.enderchest.EnderchestCommand;
 import de.elia.features.fly.FlyCommand;
 import de.elia.features.fly.FlySpeedCommand;
 import de.elia.features.heal.HealCommand;
+import de.elia.features.msg.MsgCommand;
+import de.elia.features.msg.ReplyCommand;
 import de.elia.features.playerhead.PlayerHeadCommand;
 import de.elia.features.playtime.PlaytimeCommand;
 import de.elia.features.sign.ItemNameCommand;
@@ -68,6 +70,8 @@ public class CommandRegister {
     COMMANDS.put("iplookup", new IPLookUpCommand());
     COMMANDS.put("fullbright", new FullbrightCommand());
     COMMANDS.put("tpahere", new TpaHereCommand());
+    COMMANDS.put("msg", new MsgCommand());
+    COMMANDS.put("r", new ReplyCommand());
   }
 
   public static void registerCommand(@NotNull String name, @NotNull Command command, @NotNull Server server){

@@ -7,6 +7,7 @@ import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.event.HoverEvent;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
+import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -63,6 +64,8 @@ public class TpaCommand extends Command {
     Component accept = miniMessage.deserialize("<#FF9BDF>annehmen</#FF9BDF>").clickEvent(ClickEvent.runCommand("/tpaaccept " + player.getName())).hoverEvent(HoverEvent.showText(miniMessage.deserialize("<grey>klick hier")));
     Component deny = miniMessage.deserialize("<#FF9BDF>ablehnen</#FF9BDF>").clickEvent(ClickEvent.runCommand("/tpadeny " + player.getName())).hoverEvent(HoverEvent.showText(miniMessage.deserialize("<grey>klick hier")));
     Message.mainPrefix(message.append(accept).append(slash).append(deny), targetPlayer);
+
+    targetPlayer.playSound(targetPlayer, Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
 
     return false;
   }
