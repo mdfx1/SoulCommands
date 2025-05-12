@@ -144,7 +144,9 @@ public class WhoisCommand extends Command {
       versionMap.put(765, "1.20.3/1.20.4");
       versionMap.put(766, "1.20.5");
       versionMap.put(767, "1.21");
-      versionMap.put(768, "1.21.2");
+      versionMap.put(768, "1.21.2/1.21.3");
+      versionMap.put(769, "1.21.4");
+      versionMap.put(770, "1.21.5");
 
         int protocol = targetPlayer.getProtocolVersion();
         String version = versionMap.getOrDefault(protocol, "Unbekannte Version (" + protocol + ")");
