@@ -4,6 +4,7 @@ import de.elia.features.bedrock.fullbright.FbRespawnListener;
 import de.elia.features.chat.ChatListener;
 import de.elia.features.commandwatcher.CommandWatcherListener;
 
+import de.elia.features.minimap.MiniMapDisable;
 import de.elia.features.teleport.back.TeleportListener;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
@@ -25,6 +26,7 @@ public class EventRegister {
     EVENTS.add(new ChatListener());
     EVENTS.add(new TeleportListener());
     EVENTS.add(new FbRespawnListener());
+    EVENTS.add(new MiniMapDisable());
   }
 
   public static void registerEvents(@NotNull PluginManager pluginManager, @NotNull Plugin plugin){
