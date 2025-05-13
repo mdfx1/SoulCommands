@@ -11,15 +11,25 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.permissions.Permission;
+import org.bukkit.permissions.PermissionDefault;
 import org.jetbrains.annotations.NotNull;
 
 public class SetSpawnCommand extends Command {
+
+  private static final String BYPASS_PERMISSION = "soulsmp.setspawn";
+
   protected SetSpawnCommand(@NotNull String name) {
     super(name);
   }
 
   public SetSpawnCommand (){
     this("setspawn");
+    if (Bukkit.getPluginManager().getPermission(BYPASS_PERMISSION) == null) {
+      Bukkit.getPluginManager().addPermission(
+        new Permission(BYPASS_PERMISSION, "", PermissionDefault.OP)
+      );
+    }
   }
 
   FileConfiguration config = Main.getInstance().getConfig();
@@ -30,7 +40,7 @@ public class SetSpawnCommand extends Command {
       ErrorMessage.noPlayer(sender);
       return false;
     }
-    if(!player.hasPermission("soulsmp.setspawn") && !player.isOp()){
+    if(!player.hasPermission(BYPASS_PERMISSION)){
       ErrorMessage.noPermission(player);
       return false;
     }

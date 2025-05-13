@@ -15,6 +15,8 @@ import org.bukkit.Statistic;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.permissions.Permission;
+import org.bukkit.permissions.PermissionDefault;
 import org.jetbrains.annotations.NotNull;
 
 import java.text.SimpleDateFormat;
@@ -23,8 +25,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class WhoisCommand extends Command {
+
+    private static final String BYPASS_PERMISSION = "soulsmp.whois";
+
     public WhoisCommand() {
-        this("whois");
+      this("whois");
+      if (Bukkit.getPluginManager().getPermission(BYPASS_PERMISSION) == null) {
+        Bukkit.getPluginManager().addPermission(
+          new Permission(BYPASS_PERMISSION, "", PermissionDefault.OP)
+        );
+      }
     }
 
     protected WhoisCommand(@NotNull String name) {
@@ -39,7 +49,7 @@ public class WhoisCommand extends Command {
             ErrorMessage.noPlayer(sender);
             return false;
         }
-        if (!player.hasPermission("soulsmp.whois") && !player.isOp()) {
+        if (!player.hasPermission(BYPASS_PERMISSION)) {
             ErrorMessage.noPermission(player);
             return false;
         }

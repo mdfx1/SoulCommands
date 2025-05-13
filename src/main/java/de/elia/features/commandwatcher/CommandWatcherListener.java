@@ -7,6 +7,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
+import org.bukkit.permissions.Permission;
+import org.bukkit.permissions.PermissionDefault;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +16,18 @@ import java.util.List;
 import static de.elia.api.messages.builder.MessageBuilder.*;
 
 public class CommandWatcherListener implements Listener {
+
+
+  private static final String BYPASS_PERMISSION = "soulsmp.commandwatch";
+
+  public CommandWatcherListener() {
+    // Register the bypass permission if it doesn't exist
+    if (Bukkit.getPluginManager().getPermission(BYPASS_PERMISSION) == null) {
+      Bukkit.getPluginManager().addPermission(
+        new Permission(BYPASS_PERMISSION, "Allows watching others", PermissionDefault.OP)
+      );
+    }
+  }
 
   @EventHandler
   public void onPlayerCommand(PlayerCommandPreprocessEvent event){
@@ -32,9 +46,10 @@ public class CommandWatcherListener implements Listener {
       return;
     }
 
+
     Bukkit.getOnlinePlayers().forEach(watchPlayer -> {
       //only send Command to those who have command watch active and have the permission
-      if((!watchPlayer.hasPermission("soulsmp.commandwatch") || watchPlayer.isOp()) && !CommandWatcherToggle.cwPlayers.contains(watchPlayer)) {
+      if(!watchPlayer.hasPermission(BYPASS_PERMISSION)) {
         return;
       }
       //check so that admin don't see their own commands
