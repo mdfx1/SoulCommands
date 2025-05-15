@@ -9,6 +9,8 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.permissions.Permission;
+import org.bukkit.permissions.PermissionDefault;
 import org.jetbrains.annotations.NotNull;
 
 import javax.xml.crypto.Data;
@@ -19,17 +21,24 @@ import java.util.concurrent.CompletableFuture;
 
 public class IPLookUpCommand extends Command {
 
+  private static final String BYPASS_PERMISSION = "soulsmp.iplookup";
+
   protected IPLookUpCommand(@NotNull String name) {
     super(name);
   }
 
   public IPLookUpCommand() {
     this("iplookup");
+    if (Bukkit.getPluginManager().getPermission(BYPASS_PERMISSION) == null) {
+      Bukkit.getPluginManager().addPermission(
+        new Permission(BYPASS_PERMISSION, "", PermissionDefault.OP)
+      );
+    }
   }
 
   @Override
   public boolean execute(@NotNull CommandSender sender, @NotNull String commandLabel, @NotNull String @NotNull [] args) {
-    if (!sender.isOp() && !sender.hasPermission("soulplusw.iplookup")) {
+    if (!sender.hasPermission(BYPASS_PERMISSION)) {
       sender.sendMessage("Du hast keine Berechtigung, diesen Befehl auszufÃ¼hren.");
       return false;
     }

@@ -11,15 +11,25 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
+import org.bukkit.permissions.Permission;
+import org.bukkit.permissions.PermissionDefault;
 import org.jetbrains.annotations.NotNull;
 
 public class PlayerHeadCommand extends Command {
+
+  private static final String BYPASS_PERMISSION = "soulsmp.playerhead";
+
   protected PlayerHeadCommand(@NotNull String name) {
     super(name);
   }
 
   public PlayerHeadCommand() {
     this("playerhead");
+    if (Bukkit.getPluginManager().getPermission(BYPASS_PERMISSION) == null) {
+      Bukkit.getPluginManager().addPermission(
+        new Permission(BYPASS_PERMISSION, "", PermissionDefault.OP)
+      );
+    }
   }
 
   @Override
@@ -28,7 +38,7 @@ public class PlayerHeadCommand extends Command {
       ErrorMessage.noPlayer(sender);
       return false;
     }
-    if (!player.hasPermission("soulsmp.playerhead") && !player.isOp()) {
+    if (!player.hasPermission(BYPASS_PERMISSION)) {
       ErrorMessage.noPermission(player);
       return false;
     }

@@ -7,6 +7,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.permissions.Permission;
+import org.bukkit.permissions.PermissionDefault;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.Console;
@@ -14,17 +16,25 @@ import java.util.Arrays;
 import java.util.List;
 
 public class HealCommand extends Command {
+
+  private static final String BYPASS_PERMISSION = "soulsmp.heal";
+
   protected HealCommand(@NotNull String name) {
     super(name);
   }
 
   public HealCommand(){
     this("heal");
+    if (Bukkit.getPluginManager().getPermission(BYPASS_PERMISSION) == null) {
+      Bukkit.getPluginManager().addPermission(
+        new Permission(BYPASS_PERMISSION, "", PermissionDefault.OP)
+      );
+    }
   }
 
   @Override
   public boolean execute(@NotNull CommandSender sender, @NotNull String s, @NotNull String @NotNull [] args) {
-    if(!sender.hasPermission("soulsmp.heal") && !sender.isOp()){
+    if(!sender.hasPermission(BYPASS_PERMISSION)){
       ErrorMessage.noPermission(sender);
       return false;
     }

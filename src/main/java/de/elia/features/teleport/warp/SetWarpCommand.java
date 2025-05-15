@@ -4,10 +4,13 @@ import de.elia.Main;
 import de.elia.features.teleport.TeleportUtils;
 import de.elia.utils.ErrorMessage;
 import de.elia.utils.Message;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.permissions.Permission;
+import org.bukkit.permissions.PermissionDefault;
 import org.checkerframework.checker.units.qual.N;
 import org.jetbrains.annotations.NotNull;
 
@@ -15,12 +18,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SetWarpCommand extends Command {
+
+    private static final String BYPASS_PERMISSION = "soulsmp.setwarp";
+
     protected SetWarpCommand(@NotNull String name) {
         super(name);
     }
 
     public SetWarpCommand(){
         this("warp");
+      if (Bukkit.getPluginManager().getPermission(BYPASS_PERMISSION) == null) {
+        Bukkit.getPluginManager().addPermission(
+          new Permission(BYPASS_PERMISSION, "", PermissionDefault.OP)
+        );
+      }
     }
 
     private WarpManager warpManager = Main.getWarpManager();
@@ -31,7 +42,7 @@ public class SetWarpCommand extends Command {
             ErrorMessage.noPlayer(sender);
             return false;
         }
-        if(!player.hasPermission("soulsmp.admin") && !player.isOp()){
+        if(!player.hasPermission(BYPASS_PERMISSION)){
             ErrorMessage.noPermission(player);
             return false;
         }

@@ -1,23 +1,34 @@
 package de.elia.features.sign;
 
 import de.elia.utils.ErrorMessage;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.permissions.Permission;
+import org.bukkit.permissions.PermissionDefault;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ItemNameCommand extends Command {
+
+  private static final String BYPASS_PERMISSION = "soulsmp.iname";
+
   protected ItemNameCommand(@NotNull String name) {
     super(name);
   }
 
   public ItemNameCommand() {
     this("iname");
+    if (Bukkit.getPluginManager().getPermission(BYPASS_PERMISSION) == null) {
+      Bukkit.getPluginManager().addPermission(
+        new Permission(BYPASS_PERMISSION, "", PermissionDefault.OP)
+      );
+    }
   }
 
   @Override
@@ -26,7 +37,7 @@ public class ItemNameCommand extends Command {
       ErrorMessage.noPlayer(sender);
       return false;
     }
-    if (!player.hasPermission("soulsmp.itemname") && !player.isOp()) {
+    if (!player.hasPermission(BYPASS_PERMISSION)) {
       ErrorMessage.noPermission(player);
       return false;
     }
