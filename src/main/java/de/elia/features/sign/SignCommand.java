@@ -4,11 +4,14 @@ import de.elia.utils.ErrorMessage;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.md_5.bungee.api.chat.BaseComponent;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.permissions.Permission;
+import org.bukkit.permissions.PermissionDefault;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -16,12 +19,20 @@ import java.util.Collections;
 import java.util.List;
 
 public class SignCommand extends Command {
+
+  private static final String BYPASS_PERMISSION = "soulsmp.sign";
+
   protected SignCommand(String name) {
     super(name);
   }
 
   public SignCommand() {
     this("sign");
+    if (Bukkit.getPluginManager().getPermission(BYPASS_PERMISSION) == null) {
+      Bukkit.getPluginManager().addPermission(
+        new Permission(BYPASS_PERMISSION, "", PermissionDefault.OP)
+      );
+    }
   }
 
   @Override
@@ -30,7 +41,7 @@ public class SignCommand extends Command {
       ErrorMessage.noPlayer(sender);
       return false;
     }
-    if (!player.hasPermission("soulsmp.sign") && !player.isOp()) {
+    if (!player.hasPermission(BYPASS_PERMISSION)) {
       ErrorMessage.noPermission(player);
       return false;
     }

@@ -10,6 +10,8 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import org.bukkit.permissions.Permission;
+import org.bukkit.permissions.PermissionDefault;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -20,8 +22,15 @@ import static de.elia.api.messages.builder.MessageBuilder.*;
 //This command sends the play time of a player
 public class PlaytimeCommand extends Command {
 
+  private static final String BYPASS_PERMISSION = "soulsmp.playtime";
+
   public PlaytimeCommand(){
     this("playtime");
+    if (Bukkit.getPluginManager().getPermission(BYPASS_PERMISSION) == null) {
+      Bukkit.getPluginManager().addPermission(
+        new Permission(BYPASS_PERMISSION, "", PermissionDefault.OP)
+      );
+    }
   }
 
   public PlaytimeCommand(@NotNull String name) {
@@ -36,7 +45,7 @@ public class PlaytimeCommand extends Command {
       return false;
     }
     //set permission for later use
-    if(player.hasPermission("soulsmp.playtime") || player.isOp()){
+    if(player.hasPermission(BYPASS_PERMISSION)){
       hasPermission = true;
     }
     switch (args.length){

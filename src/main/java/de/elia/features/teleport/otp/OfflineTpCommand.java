@@ -7,15 +7,25 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.permissions.Permission;
+import org.bukkit.permissions.PermissionDefault;
 import org.jetbrains.annotations.NotNull;
 
 public class OfflineTpCommand extends Command {
+
+  private static final String BYPASS_PERMISSION = "soulsmp.otp";
+
   protected OfflineTpCommand(@NotNull String name) {
     super(name);
   }
 
     public OfflineTpCommand(){
-        this("otp");
+      this("otp");
+      if (Bukkit.getPluginManager().getPermission(BYPASS_PERMISSION) == null) {
+        Bukkit.getPluginManager().addPermission(
+          new Permission(BYPASS_PERMISSION, "", PermissionDefault.OP)
+        );
+      }
     }
 
   @Override
@@ -24,7 +34,7 @@ public class OfflineTpCommand extends Command {
       ErrorMessage.noPlayer(sender);
       return false;
     }
-    if (!player.hasPermission("soulsmp.offlinetp")){
+    if (!player.hasPermission(BYPASS_PERMISSION)){
       ErrorMessage.noPermission(sender);
       return false;
     }

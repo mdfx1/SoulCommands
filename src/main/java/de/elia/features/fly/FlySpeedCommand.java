@@ -3,20 +3,31 @@ package de.elia.features.fly;
 import de.elia.utils.ErrorMessage;
 import de.elia.utils.Message;
 import io.papermc.paper.configuration.type.fallback.FallbackValue;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.permissions.Permission;
+import org.bukkit.permissions.PermissionDefault;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 
 public class FlySpeedCommand extends Command {
+
+  private static final String BYPASS_PERMISSION = "soulsmp.flyspeed";
+
   protected FlySpeedCommand(@NotNull String name) {
     super(name);
   }
 
   public FlySpeedCommand(){
     this("flyspeed");
+    if (Bukkit.getPluginManager().getPermission(BYPASS_PERMISSION) == null) {
+      Bukkit.getPluginManager().addPermission(
+        new Permission(BYPASS_PERMISSION, "", PermissionDefault.OP)
+      );
+    }
   }
 
   @Override
@@ -25,7 +36,7 @@ public class FlySpeedCommand extends Command {
       ErrorMessage.noPlayer(sender);
       return false;
     }
-    if(!player.hasPermission("soulsmp.fly") && !player.isOp()){
+    if(!player.hasPermission(BYPASS_PERMISSION)){
       ErrorMessage.noPermission(player);
       return false;
     }

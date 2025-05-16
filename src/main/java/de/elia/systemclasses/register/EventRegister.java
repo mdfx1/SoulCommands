@@ -1,12 +1,15 @@
 package de.elia.systemclasses.register;
 
 import de.elia.features.bedrock.fullbright.FbRespawnListener;
+import de.elia.features.bypassFull.BypassListener;
 import de.elia.features.chat.ChatListener;
 import de.elia.features.commandwatcher.CommandWatcherListener;
 
 import de.elia.features.minimap.MiniMapDisable;
+import de.elia.features.playerhead.PlayerHeadListener;
 import de.elia.features.teleport.back.TeleportListener;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
@@ -27,6 +30,8 @@ public class EventRegister {
     EVENTS.add(new TeleportListener());
     EVENTS.add(new FbRespawnListener());
     EVENTS.add(new MiniMapDisable());
+    EVENTS.add(new BypassListener());
+    EVENTS.add(new PlayerHeadListener());
   }
 
   public static void registerEvents(@NotNull PluginManager pluginManager, @NotNull Plugin plugin){
